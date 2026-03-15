@@ -1,0 +1,139 @@
+@charset "UTF-8";
+.login-page {
+  background-color: #f4f8eb;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.logo-section {
+  margin-bottom: 35px;
+}
+.logo-section .main-logo {
+  width: 80px;
+  filter: invert(56%) sepia(59%) saturate(2250%) hue-rotate(345deg) brightness(101%) contrast(99%);
+}
+.logo-section .brand-name {
+  font-family: "Dancing Script", cursive;
+  color: #235B5E;
+  font-size: 3rem;
+  margin: 0;
+  line-height: 1;
+}
+.logo-section .page-subtitle {
+  color: #235B5E;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  opacity: 0.6;
+  display: block;
+  margin-top: 5px;
+}
+
+.login-form .input-wrapper {
+  position: relative;
+  margin-bottom: 25px;
+  border-bottom: 1.5px solid rgba(35, 91, 94, 0.4);
+}
+.login-form .input-wrapper input {
+  width: 100%;
+  padding: 10px 35px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #235B5E;
+  font-size: 1.05rem;
+  transition: all 0.2s ease-in-out;
+}
+.login-form .input-wrapper input:focus {
+  border-bottom: 1.5px solid #FE7F2D;
+}
+.login-form .input-wrapper .input-icon {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #235B5E;
+  font-size: 1.2rem;
+}
+.login-form .input-wrapper .password-toggle {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #235B5E;
+  opacity: 0.7;
+  transition: all 0.2s ease-in-out;
+}
+.login-form .input-wrapper .password-toggle:hover {
+  color: #FE7F2D;
+  opacity: 1;
+}
+.login-form .withoutLogin {
+  text-align: right;
+  margin-top: -15px;
+  margin-bottom: 30px;
+}
+.login-form .withoutLogin a {
+  color: #235B5E;
+  font-size: 0.85rem;
+  text-decoration: none;
+  opacity: 0.8;
+  transition: all 0.2s ease-in-out;
+}
+.login-form .withoutLogin a:hover {
+  color: #FE7F2D;
+  opacity: 1;
+}
+.login-form .submit-btn {
+  width: 60%;
+  background: #FE7F2D;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 20px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 10px rgba(254, 127, 45, 0.2);
+}
+.login-form .submit-btn:hover {
+  background: rgb(253.8791469194, 111.5308056872, 19.6208530806);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(254, 127, 45, 0.3);
+}
+.login-form .submit-btn:active {
+  transform: translateY(0);
+}
+
+.form-footer {
+  margin-top: 40px;
+}
+.form-footer p {
+  font-size: 0.9rem;
+  color: #235B5E;
+  margin: 0;
+  opacity: 0.7;
+}
+.form-footer .footer-link {
+  all: unset;
+  font-family: "Dancing Script", cursive;
+  color: #235B5E;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  line-height: 1.2;
+}
+.form-footer .footer-link:hover {
+  color: #FE7F2D;
+  transform: scale(1.1) rotate(-2deg); /* Egy kis játékos mozgás */
+}/*# sourceMappingURL=login.css.map */

@@ -1,0 +1,89 @@
+<nav class="navbar navbar-expand-lg position-fixed w-100 z-3">
+    <div class="container-fluid d-flex align-items-center justify-content-between px-4 px-lg-5">
+
+        <a class="navbar-brand d-flex align-items-center m-0" routerLink="/">
+            <img src="assets/logo.png" height="50" alt="Logo" />
+            <span class="brand-text">Recept +</span>
+        </a>
+
+        <div class="nav-right-section">
+            @if (isLoggedIn()) {
+
+            <div class="nav-icons-container d-none d-lg-flex">
+                <a routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active-link"
+                    class="nav-item">
+                    <i class="bi bi-house-door nav-icon"></i>
+                    <span class="nav-label">Főoldal</span>
+                </a>
+                <a routerLink="/recipesFromInventory" routerLinkActive="active-link" class="nav-item">
+                    <i class="bi bi-journal-bookmark nav-icon"></i>
+                    <span class="nav-label">Elkészíthető</span>
+                </a>
+                <a routerLink="/user-recipes" routerLinkActive="active-link" class="nav-item">
+                    <i class="bi bi-clipboard-heart nav-icon"></i>
+                    <span class="nav-label">Receptjeid</span>
+                </a>
+                <a routerLink="/user-storage" routerLinkActive="active-link" class="nav-item">
+                    <i class="bi bi-box-seam nav-icon"></i>
+                    <span class="nav-label">Raktár</span>
+                </a>
+
+                <div class="dropdown profile-dropdown" routerLinkActive="active-link">
+                    <div class="profile-trigger d-flex align-items-center" data-bs-toggle="dropdown">
+                        <div class="nav-item m-0">
+                            <i class="bi bi-person-circle nav-icon"></i>
+                            <span class="nav-label">Profil</span>
+                        </div>
+                        <i class="bi bi-chevron-down chevron-icon"></i>
+                    </div>
+                    <ul class="dropdown-menu dropdown-menu-end custom-dropdown">
+                        <li><a class="dropdown-item" routerLink="/account"><span>Fiók</span><i
+                                    class="bi bi-person-circle"></i></a></li>
+                        <li><a class="dropdown-item" routerLink="/settings"><span>Beállítások</span><i
+                                    class="bi bi-gear"></i></a></li>
+                        <li class="logout-section"><button class="dropdown-item logout-btn"
+                                (click)="logout()">Kijelentkezés</button></li>
+                    </ul>
+                </div>
+            </div>
+
+            <button class="mobile-menu-btn d-lg-none" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#mobileMenu">
+                <i class="bi bi-list"></i>
+            </button>
+
+            } @else {
+            <button class="btn btn-login" routerLink="/login">Bejelentkezés</button>
+            }
+        </div>
+    </div>
+</nav>
+
+<div class="offcanvas offcanvas-end mobile-sidebar d-lg-none" tabindex="-1" id="mobileMenu">
+    <div class="offcanvas-header justify-content-end">
+        <button type="button" class="btn-close-custom" data-bs-dismiss="offcanvas">
+            <i class="bi bi-x-lg"></i>
+        </button>
+    </div>
+    <div class="offcanvas-body">
+        <ul class="mobile-nav-list">
+            <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                    data-bs-dismiss="offcanvas"><i class="bi bi-house-door-fill"></i> Főoldal</a></li>
+            <li><a routerLink="/recipesFromInventory" routerLinkActive="active" data-bs-dismiss="offcanvas"><i
+                        class="bi bi-journal-bookmark-fill"></i> Elkészíthető</a></li>
+            <li><a routerLink="/user-recipes" routerLinkActive="active" data-bs-dismiss="offcanvas"><i
+                        class="bi bi-clipboard-heart-fill"></i> Receptjeid</a></li>
+            <li><a routerLink="/user-storage" routerLinkActive="active" data-bs-dismiss="offcanvas"><i
+                        class="bi bi-box-seam-fill"></i> Raktár</a></li>
+            <li><a routerLink="/account" routerLinkActive="active" data-bs-dismiss="offcanvas"><i
+                        class="bi bi-person-circle"></i> Fiók</a></li>
+            <li><a routerLink="/settings" routerLinkActive="active" data-bs-dismiss="offcanvas"><i
+                        class="bi bi-gear"></i> Beállítások</a></li>
+        </ul>
+        @if (isLoggedIn()) {
+        <div class="mobile-logout-wrapper">
+            <button class="logout-btn" (click)="logout()" data-bs-dismiss="offcanvas">Kijelentkezés</button>
+        </div>
+        }
+    </div>
+</div>

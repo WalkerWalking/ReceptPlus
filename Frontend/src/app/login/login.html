@@ -1,0 +1,43 @@
+<div class="login-page">
+  <div class="login-card">
+    <header class="logo-section">
+      <img src="assets/logo.png" alt="Recept+ Logo" class="main-logo">
+      <h1 class="brand-name">Recept +</h1>
+      <span class="page-subtitle">BEJELENTKEZÉS</span>
+    </header>
+
+    <form class="login-form">
+      <div class="input-wrapper">
+        <i class="bi bi-envelope input-icon"></i>
+        <input type="text" placeholder="E-mail cím" required [(ngModel)]="userEmail" name="email">
+      </div>
+
+      <div class="input-wrapper">
+        <i class="bi bi-lock input-icon"></i>
+        <input [type]="showPassword ? 'text' : 'password'" placeholder="Jelszó" required [(ngModel)]="userPassword" name="password">
+        <i class="bi password-toggle" 
+           [class.bi-eye]="!showPassword" 
+           [class.bi-eye-slash]="showPassword" 
+           (click)="togglePassword()"></i>
+      </div>
+
+      <div class="withoutLogin">
+        <a routerLink="/withoutLogin">Folytatás bejelentkezés nélkül</a>
+      </div>
+
+      @if (userPassword.length != 0) {
+        <button type="submit" class="submit-btn" (click)="loginBtnPressed()" >Belépés</button>
+      }
+      @else {
+        <button class="submit-btn-disabled" disabled>Belépés</button>
+      }
+
+      <div class="form-footer">
+        <p>Nincs még fiókod?</p>
+        <button type="button" (click)="goToRegister()" class="footer-link">
+          Regisztrálj!
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

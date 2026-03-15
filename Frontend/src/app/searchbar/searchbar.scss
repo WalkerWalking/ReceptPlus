@@ -1,0 +1,62 @@
+$primary-orange: #FE7F2D;
+$dark-teal: #235B5E;
+$white: #ffffff;
+
+.search-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end; // Ez tolja az egész hóbelevancot a jobb szélre
+    padding: 20px;
+    box-sizing: border-box;
+    margin-top: 1rem;
+}
+
+.search-wrapper.small-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 600px; // Itt állítod be, mennyire legyen kicsi (pl. 300px)
+}
+
+.search-input {
+    flex-grow: 1;
+    background-color: $primary-orange;
+    border: none;
+    border-radius: 10px; // Kicsit finomabb lekerekítés a kisebb mérethez
+    padding: 8px 15px;
+    color: $white;
+    font-size: 1rem; // Kisebb betű
+    height: 45px;   // Alacsonyabb profil
+
+    &::placeholder {
+        color: rgba($white, 0.9);
+        text-align: right;
+        font-size: 1.2rem;
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.search-button {
+    background-color: $dark-teal;
+    color: $white;
+    border: none;
+    width: 45px;  // Pontosan akkora, mint az input magassága
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    flex-shrink: 0; // Ne engedje összenyomni a kört
+
+    img {
+        width: 95%;
+    }
+
+    &:hover {
+        background-color: darken($dark-teal, 8%);
+    }
+}

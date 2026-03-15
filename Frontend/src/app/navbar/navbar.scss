@@ -1,0 +1,205 @@
+/* --- VÁLTOZÓK --- */
+$comment-orange: #FE7F2D;
+$dark-teal: #235B5E;
+$mobile-navy: #223843;
+$transition-speed: 0.3s;
+
+/* --- NAVBAR ALAPOK --- */
+.navbar {
+    background-color: $comment-orange;
+    height: 85px;
+    padding: 0;
+    z-index: 1030;
+
+    .btn-login{
+        background-color: $dark-teal;
+        color: white;
+        padding: 0.5rem;
+    }
+
+    .brand-text {
+        font-family: 'Dancing Script', cursive;
+        font-size: 1.8rem;
+        color: white;
+        margin-left: 10px;
+        line-height: 1;
+    }
+
+    .mobile-menu-btn {
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 2.5rem;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+}
+
+/* --- ASZTALI NÉZET (992px felett) --- */
+@media (min-width: 992px) {
+    .nav-icons-container {
+        display: flex;
+        align-items: center;
+        height: 70px;
+        gap: 8px;
+    }
+
+    .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-width: 85px;
+        height: 70px;
+        text-decoration: none;
+        cursor: pointer;
+        background: transparent;
+        border: none;
+
+        .nav-icon {
+            font-size: 2rem;
+            color: $dark-teal;
+            transform: translateY(10px);
+            transition: all $transition-speed ease;
+        }
+
+        .nav-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: white;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all $transition-speed ease;
+            pointer-events: none;
+        }
+
+        &:hover, &.active-link {
+            .nav-icon { color: white !important; transform: translateY(0) !important; }
+            .nav-label { opacity: 1 !important; transform: translateY(0) !important; }
+        }
+    }
+
+    /* DROPDOWN JAVÍTVA */
+    .profile-dropdown {
+        display: flex;
+        align-items: center;
+        height: 70px;
+
+        .profile-trigger {
+            cursor: pointer;
+            .chevron-icon {
+                font-size: 0.85rem;
+                color: white;
+                margin-left: 4px;
+                margin-top: 6px;
+                transition: transform $transition-speed ease;
+                transform: rotate(180deg);
+            }
+        }
+
+        &.show, .profile-trigger.show {
+            .chevron-icon { transform: rotate(0deg) !important; }
+            .nav-item {
+                .nav-icon { color: white !important; transform: translateY(0) !important; }
+                .nav-label { opacity: 1 !important; transform: translateY(0) !important; }
+            }
+        }
+
+        &.active-link .nav-item {
+            .nav-icon { color: white !important; transform: translateY(0) !important; }
+            .nav-label { opacity: 1 !important; transform: translateY(0) !important; }
+        }
+    }
+
+    .dropdown-menu.custom-dropdown {
+        background-color: $comment-orange;
+        border: none;
+        border-radius: 12px;
+        min-width: 200px;
+        padding: 0;
+        margin-top: 5px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+            font-weight: 600;
+            color: white;
+            &:hover { background-color: rgba(255, 255, 255, 0.15); }
+            i { font-size: 1.4rem; color: $dark-teal; }
+        }
+
+        .logout-section {
+            background-color: $dark-teal;
+            .logout-btn {
+                width: 100%;
+                padding: 15px 20px;
+                font-weight: 700;
+                color: white;
+                background: transparent;
+                border: none;
+                text-align: left;
+                &:hover { background-color: rgba(0, 0, 0, 0.15); }
+            }
+        }
+    }
+}
+
+/* --- MOBIL NÉZET (992px alatt) --- */
+.mobile-sidebar {
+    background-color: $mobile-navy !important;
+    width: 280px !important;
+    border: none;
+
+    .btn-close-custom {
+        background: transparent;
+        border: none;
+        color: $comment-orange;
+        font-size: 2.2rem;
+        padding: 20px;
+    }
+
+    .mobile-nav-list {
+        list-style: none;
+        padding: 0 30px;
+        margin-top: 20px;
+
+        li {
+            margin-bottom: 30px;
+            a {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+                color: white;
+                text-decoration: none;
+                font-size: 1.8rem;
+                i { font-size: 2.4rem; width: 40px; text-align: center; }
+                &.active {
+                    color: $comment-orange;
+                    i { color: $comment-orange; }
+                }
+            }
+        }
+    }
+
+    .mobile-logout-wrapper {
+        position: absolute;
+        bottom: 40px;
+        width: 100%;
+        padding: 0 30px;
+        .logout-btn {
+            width: calc(100% - 60px);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ff4d4d;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 700;
+        }
+    }
+}

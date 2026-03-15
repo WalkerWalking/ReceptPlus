@@ -1,0 +1,28 @@
+<div class="container mt-4 mb-5">
+  <h2 class="mb-4 text-secondary border-bottom pb-2">Interaktív Készlet</h2>
+
+  <div class="row g-3">
+    @if (ingredients) {
+      @for (item of ingredients(); track item.name) {
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="ingredient-card d-flex align-items-stretch shadow-sm">
+
+          <div class="name-section d-flex align-items-center flex-grow-1 px-2">
+            <input [(ngModel)]="item.name" class="form-control-plaintext custom-input-name" /> <button (click)="deleteItem(item.id)">Törlés</button>
+          </div>
+          <div class="quantity-section d-flex flex-column justify-content-center align-items-center">
+            <input type="number" [(ngModel)]="item.amount" class="form-control-plaintext custom-input-amount" />
+            <div class="helper-text">
+              {{ getFormattedAmount(item) }}
+            </div>
+          </div>
+        </div>
+      </div>
+      }      
+    }
+    
+    @else {
+      <ng-template #loading>Betöltés...</ng-template>
+    }
+  </div>  
+</div>

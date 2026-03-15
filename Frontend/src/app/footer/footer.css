@@ -1,0 +1,28 @@
+.recipe-footer {
+  background-color: #FE7F2D;
+  padding: 40px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid #1a1a1a;
+}
+.recipe-footer .footer-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.recipe-footer .footer-content .footer-logo img {
+  width: 5rem;
+  height: auto;
+  filter: brightness(0) invert(1);
+}
+.recipe-footer .footer-content .footer-text {
+  color: #235B5E;
+  font-family: "Dancing Script", cursive;
+  font-size: 2rem;
+  margin: 0;
+  font-weight: 400;
+}/*# sourceMappingURL=footer.css.map */

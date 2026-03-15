@@ -1,0 +1,53 @@
+<div class="recipe-section">
+    <div class="container">
+        <h1 class="section-title">Receptjeid</h1>
+        <p class="section-subtitle">Az alkalmazásba feltöltött recepjeid</p>
+
+        <div class="row g-4">
+            @for (recipe of userRecipes(); track recipe.id) {
+            <div class="col-lg-4 col-md-6" (click)="goToRecipe(recipe)">
+                <div class="recipe-card">
+                    <div class="card-image">
+                        <img [src]="recipe.imageUrl" [alt]="recipe.name">
+                    </div>
+
+                    <div class="card-content">
+                        <div class="card-header-row">
+                            <h2 class="recipe-name">{{ recipe.name }}</h2>                            
+                        </div>
+
+                        <ul class="ingredient-list">
+                            @for (ing of recipe.ingredients; track ing.name) {
+                            <li>
+                                {{ ing.name }}: <span class="amount">{{ ing.amount }} {{ing.unit}}</span>
+                            </li>
+                            } @empty {
+                            <li>Nincsenek hozzávalók.</li>
+                            }
+                        </ul>
+
+                        <div class="card-footer-row">
+                            <div class="comment-container">
+                                <button type="button" class="btn btn-recipeSelect" (click)="goToRecipe(recipe)">
+                                    <i class="bi bi-arrow-return-right"></i>
+                                </button>
+                            </div>
+                        </div>    
+                    </div>
+                </div>
+            </div>
+            } @empty {
+            <div class="col-12 text-center">
+                <p>Üres a recepttár...</p>
+            </div>
+            }
+            <div class="row mt-4">
+                <div class="col-12 d-flex justify-content-center">
+                    <div class="add-recipe-btn shadow-sm">
+                        Recept hozzáadása <i class="bi bi-plus-lg ms-1"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

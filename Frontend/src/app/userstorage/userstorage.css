@@ -1,0 +1,49 @@
+.ingredient-card {
+  height: 85px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: white;
+}
+.ingredient-card .name-section {
+  background-color: #ff832b;
+}
+.ingredient-card .name-section .custom-input-name {
+  color: #1a1a1a;
+  font-size: 1.3rem;
+  font-weight: 500;
+  border: none;
+  padding: 5px;
+}
+.ingredient-card .name-section .custom-input-name:focus {
+  background: rgba(255, 255, 255, 0.2);
+  outline: none;
+}
+.ingredient-card .quantity-section {
+  background-color: #d9d9d9;
+  min-width: 130px;
+  padding: 5px;
+}
+.ingredient-card .quantity-section .custom-input-amount {
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  color: #000;
+}
+.ingredient-card .quantity-section .custom-input-amount:focus {
+  background: rgba(255, 255, 255, 0.4);
+  outline: none;
+}
+.ingredient-card .quantity-section .helper-text {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #555;
+  text-transform: uppercase;
+  margin-top: -5px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}/*# sourceMappingURL=userstorage.css.map */

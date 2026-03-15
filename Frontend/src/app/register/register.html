@@ -1,0 +1,63 @@
+<div class="login-page">
+    <div class="login-card">
+        <header class="logo-section">
+            <img src="assets/logo.png" alt="Recept+ Logo" class="main-logo">
+            <h1 class="brand-name">Recept +</h1>
+            <span class="page-subtitle">REGISZTRÁCIÓ</span>
+        </header>
+
+        <form class="login-form">
+            <div class="form-row">
+                <div class="form-col inputs">
+                    <div class="input-wrapper">
+                        <i class="bi bi-person input-icon"></i>
+                        <input type="text" placeholder="Teljes név" required [(ngModel)]="name" name="name">
+                    </div>
+                    <div class="input-wrapper">
+                        <i class="bi bi-person input-icon"></i>
+                        <input type="text" placeholder="Felhasználónév" required [(ngModel)]="userName" name="userName">
+                    </div>
+                    <div class="input-wrapper">
+                        <i class="bi bi-envelope input-icon"></i>
+                        <input type="email" placeholder="E-mail cím" required [(ngModel)]="email" name="email">
+                    </div>
+                </div>
+
+                <div class="form-col avatar-col">
+                    <div class="avatar-upload" (click)="fileInput.click()">
+                        @if (profileImageUrl) {
+                        <img [src]="profileImageUrl" class="avatar-img">
+                        } @else {
+                        <i class="bi bi-person-fill display-1 text-secondary"></i>
+                        }
+
+                        <div class="overlay"><i class="bi bi-camera"></i></div>
+                    </div>
+                    <input #fileInput type="file" (change)="onFileSelected($event)" hidden>
+                    <span class="upload-label">FOTÓ</span>
+                </div>
+            </div>
+
+            <div class="input-wrapper">
+                <i class="bi bi-lock input-icon"></i>
+                <input [type]="showPassword ? 'text' : 'password'" placeholder="Jelszó" required [(ngModel)]="password" name="password">
+                <i class="bi password-toggle" [class.bi-eye]="!showPassword" [class.bi-eye-slash]="showPassword"
+                    (click)="togglePassword()"></i>
+            </div>
+
+            <div class="input-wrapper">
+                <i class="bi bi-shield-lock input-icon"></i>
+                <input [type]="showConfirmPassword ? 'text' : 'password'" placeholder="Jelszó megerősítése" required>
+                <i class="bi password-toggle" [class.bi-eye]="!showConfirmPassword"
+                    [class.bi-eye-slash]="showConfirmPassword" (click)="togglePassword()"></i>
+            </div>
+
+            <button type="submit" class="submit-btn" (click)="registerButtonPressed()">Regisztráció</button>
+
+            <div class="form-footer">
+                <p>Van már fiókod?</p>
+                <button type="button" class="footer-link" (click)="goToLogin()">Bejelentkezés</button>
+            </div>
+        </form>
+    </div>
+</div>
