@@ -1,0 +1,71 @@
+.profile-container {
+  min-height: 100vh;
+  border-radius: 15px;
+}
+
+.profile-picture {
+  width: 100%;
+}
+
+.avatar-circle {
+  width: 150px;
+  height: 150px;
+  background-color: #d1d8e0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.username-text {
+  color: #ff8c42;
+  font-weight: bold;
+}
+
+.profile-card {
+  background-color: #ff8c42 !important;
+  color: white;
+  border-radius: 12px;
+  position: relative;
+  transition: transform 0.2s;
+}
+.profile-card:hover {
+  transform: translateY(-5px);
+}
+.profile-card .card-title {
+  font-weight: 500;
+}
+
+.btn-edit-icon, .btn-edit-card {
+  position: absolute;
+  background-color: #ff8c42;
+  color: white;
+  border: 1px solid white;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+.btn-edit-icon:hover, .btn-edit-card:hover {
+  background-color: rgb(255, 108.9682539683, 15);
+  color: white;
+}
+
+.btn-edit-icon {
+  bottom: 45px;
+  right: 10px;
+}
+
+.btn-edit-card {
+  bottom: -15px;
+  right: -10px;
+  background-color: #e67e22;
+}
+
+.calorie-display .value {
+  font-size: 3rem;
+  font-weight: bold;
+}
+.calorie-display .unit {
+  font-size: 1rem;
+  margin-left: 5px;
+}/*# sourceMappingURL=accountinfo.css.map */

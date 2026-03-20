@@ -1,0 +1,79 @@
+<div class="recipe-section">
+  <div class="container py-5">
+
+    <div class="main-recipe-card">
+      <div class="row g-0">
+
+        <div class="col-md-5">
+          <div class="recipe-image">
+            <img [src]="selectedRecipe()?.imageUrl" [alt]="selectedRecipe()?.name">
+            <div class="image-overlay">
+              <span class="badge-custom">Recept</span>
+              <h1>{{ selectedRecipe()?.name }}</h1>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-7">
+          <div class="recipe-content">
+
+            <div class="ingredients">
+              <h5>Hozzávalók</h5>
+              <ul>
+                @for (ing of selectedRecipe()?.ingredients; track ing.name) {
+                <li>
+                  <span>{{ ing.name }}</span>
+                  <strong>{{ ing.amount }} {{ ing.unit }}</strong>
+                </li>
+                } @empty {
+                <li class="empty">Nincsenek hozzávalók</li>
+                }
+              </ul>
+            </div>
+
+            <div class="description">
+              <h5>Elkészítés</h5>
+              <p>{{ selectedRecipe()?.description }}</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button class="btn-outline" (click)="backToHome()">← Vissza</button>
+      <button class="btn-primary" (click)="makeSelectedRecipe()">Megettem 😋</button>
+    </div>
+
+    <div class="gasztro-board">
+      <div class="board-header">
+        <h3>Vélemények ({{ comments().length }})</h3>
+      </div>
+
+      <div class="notes">
+        @for (comment of comments(); track comment.id) {
+        <div class="note" [ngStyle]="{'--rotation': comment.rotation + 'deg'}" [style.background]="comment.color">
+          <p>"{{ comment.content }}"</p>
+
+          <div class="footer">
+            <span>- {{ comment.epicName }}</span>
+            @if (isOwnComment(comment)) {
+            <button class="delete-btn" (click)="deleteComment(comment.id)">
+              <i class="bi bi-trash"></i>
+            </button>
+            }
+          </div>
+        </div>
+        } @empty {
+        <p class="empty-board">Üres a fal... Írj te először!</p>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="sticky-comment-bar">
+    <textarea [(ngModel)]="newCommentContent" rows="1" placeholder="Írj gyors véleményt..."></textarea>
+    <button (click)="addComment()"><i class="bi bi-pin-angle-fill"></i></button>
+  </div>
+</div>

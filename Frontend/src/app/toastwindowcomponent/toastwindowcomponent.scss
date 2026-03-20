@@ -1,0 +1,124 @@
+.toast-wrapper {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  min-width: 320px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  z-index: 10000;
+  cursor: pointer;
+  overflow: hidden;
+  animation: slideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+
+  &.success { border-left: 6px solid #2ecc71; .icon-section { color: #2ecc71; } }
+  &.error { border-left: 6px solid #e74c3c; .icon-section { color: #e74c3c; } }
+  &.info { border-left: 6px solid #3498db; .icon-section { color: #3498db; } }
+
+  .toast-body {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    gap: 15px;
+
+    .icon-section { font-size: 1.8rem; display: flex; align-items: center; }
+
+    .message-section {
+      flex-grow: 1;
+      .title { display: block; font-weight: 800; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 2px; color: #333; }
+      .text { margin: 0; font-size: 0.85rem; color: #666; font-weight: 500; }
+    }
+
+    .close-btn { background: none; border: none; font-size: 1.5rem; color: #ccc; &:hover { color: #333; } }
+  }
+
+  .progress-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    width: 100%;
+    background: rgba(0,0,0,0.05);
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: currentColor;
+      animation: shrink 3s linear forwards;
+    }
+  }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10001;
+}
+
+.confirm-window {
+  background: white;
+  padding: 30px;
+  border-radius: 24px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+
+  .confirm-header {
+    i { font-size: 3rem; margin-bottom: 10px; display: block; }
+    h3 { font-weight: 800; color: #235B5E; margin-bottom: 15px; }
+  }
+
+  .confirm-content p {
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 1.5;
+  }
+
+  .confirm-actions {
+    display: flex;
+    gap: 15px;
+    
+    button {
+      flex: 1;
+      padding: 12px;
+      border-radius: 12px;
+      border: none;
+      font-weight: 700;
+      transition: 0.2s;
+    }
+
+    .btn-cancel {
+      background: #f1f3f5;
+      color: #495057;
+      &:hover { background: #e9ecef; }
+    }
+
+    .btn-confirm {
+      background: #e63946;
+      color: white;
+      &:hover { background: #d62828; transform: translateY(-2px); }
+    }
+  }
+}
+
+.animate-pop {
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes slideIn {
+  from { transform: translateX(120%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes shrink {
+  from { width: 100%; }
+  to { width: 0%; }
+}

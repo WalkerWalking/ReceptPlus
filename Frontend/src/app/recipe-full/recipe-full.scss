@@ -1,0 +1,276 @@
+$bg-light: #f4f8eb;
+$dark-teal: #235B5E;
+$primary-orange: #FE7F2D;
+$white: #ffffff;
+
+.recipe-section {
+  background-color: $bg-light;
+  min-height: 100vh;
+}
+
+.main-recipe-card {
+  background: $white;
+  border-radius: 35px;
+  overflow: hidden;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.15);
+  transition: 0.4s;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 40px 90px rgba(0,0,0,0.2);
+  }
+}
+
+.recipe-image {
+  position: relative;
+  height: 100%;
+
+  img {
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+    object-fit: cover;
+  }
+
+  .image-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 25px;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+
+    h1 {
+      color: white;
+      font-size: 2.2rem;
+      font-weight: 800;
+    }
+
+    .badge-custom {
+      background: $primary-orange;
+      color: white;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      width: fit-content;
+    }
+  }
+}
+
+.recipe-content {
+  padding: 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.ingredients {
+  h5 {
+    color: $dark-teal;
+    font-weight: 700;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px dashed rgba(0,0,0,0.1);
+
+      strong {
+        color: $primary-orange;
+      }
+    }
+
+    .empty {
+      opacity: 0.5;
+    }
+  }
+}
+
+.description {
+  h5 {
+    color: $dark-teal;
+  }
+
+  p {
+    color: #555;
+    line-height: 1.6;
+  }
+}
+
+.action-buttons {
+  margin: 40px 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+
+  button {
+    padding: 14px 28px;
+    border-radius: 40px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .btn-primary {
+    background: $primary-orange;
+    color: white;
+    border: none;
+
+    &:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 10px 20px rgba($primary-orange, 0.3);
+    }
+  }
+
+  .btn-outline {
+    border: 2px solid $dark-teal;
+    background: transparent;
+    color: $dark-teal;
+
+    &:hover {
+      background: $dark-teal;
+      color: white;
+    }
+  }
+}
+
+.gasztro-board {
+  background-color: #ccd5ae;
+  padding: 50px 30px;
+  border-radius: 30px;
+  border: 8px solid #a9b388;
+  box-shadow: inset 0 0 40px rgba(0,0,0,0.1);
+
+  .board-header {
+    text-align: center;
+    margin-bottom: 20px;
+
+    h3 {
+      color: white;
+      font-weight: 800;
+    }
+  }
+}
+
+.notes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+}
+
+.note {
+  width: 220px;
+  min-height: 180px;
+  padding: 20px;
+  background: #fff8dc;
+  box-shadow: 8px 12px 25px rgba(0,0,0,0.25);
+  transform: rotate(var(--rotation, -2deg));
+  transition: transform 0.3s, box-shadow 0.3s;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 92%, 85% 100%, 15% 96%, 0% 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &:hover {
+    transform: rotate(0deg) scale(1.12);
+    box-shadow: 12px 18px 35px rgba(0,0,0,0.3);
+  }
+
+  p {
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 0.95rem;
+    color: #333;
+    line-height: 1.4;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
+}
+
+.delete-btn {
+  background: rgba(0,0,0,0.05);
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: #333;
+
+  &:hover {
+    background: #e63946;
+    color: white;
+    transform: scale(1.2);
+  }
+}
+
+.empty-board {
+  text-align: center;
+  width: 100%;
+  opacity: 0.6;
+  font-style: italic;
+}
+
+.sticky-comment-bar {
+  position: sticky;
+  bottom: 0;
+  background: $bg-light;
+  padding: 8px 15px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  align-items: center;
+  z-index: 10;
+  box-shadow: 0 -5px 15px rgba(0,0,0,0.08);
+}
+
+.sticky-comment-bar textarea {
+  flex: 1;
+  max-width: 400px;
+  height: 36px;
+  border-radius: 20px;
+  border: none;
+  padding: 8px 12px;
+  resize: none;
+  outline: none;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.sticky-comment-bar button {
+  background: $primary-orange;
+  color: white;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  transition: 0.25s;
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba($primary-orange,0.3);
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+}

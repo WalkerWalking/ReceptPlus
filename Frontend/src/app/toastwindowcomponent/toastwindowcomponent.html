@@ -1,0 +1,39 @@
+@if (toastService.isVisible()) {
+  <div class="toast-wrapper" [ngClass]="toastService.type()" (click)="toastService.hide()">
+    <div class="toast-body">
+      <div class="icon-section">
+        @if (toastService.type() === 'success') { <i class="bi bi-check-circle-fill"></i> }
+        @if (toastService.type() === 'error') { <i class="bi bi-x-circle-fill"></i> }
+        @if (toastService.type() === 'info') { <i class="bi bi-info-circle-fill"></i> }
+      </div>
+      
+      <div class="message-section">
+        <span class="title">
+          {{ toastService.type() === 'success' ? 'Siker!' : toastService.type() === 'error' ? 'Hiba!' : 'Információ' }}
+        </span>
+        <p class="text">{{ toastService.message() }}</p>
+      </div>
+
+      <button class="close-btn">&times;</button>
+    </div>
+    <div class="progress-line"></div>
+  </div>
+}
+
+@if (toastService.isConfirmVisible()) {
+  <div class="modal-overlay">
+    <div class="confirm-window shadow-lg animate-pop">
+      <div class="confirm-header">
+        <i class="bi bi-exclamation-triangle-fill text-warning"></i>
+        <h3>{{ toastService.confirmTitle() }}</h3>
+      </div>
+      <div class="confirm-content">
+        <p>{{ toastService.confirmMessage() }}</p>
+      </div>
+      <div class="confirm-actions">
+        <button class="btn-cancel" (click)="toastService.resolveConfirm(false)">Mégse</button>
+        <button class="btn-confirm" (click)="toastService.resolveConfirm(true)">Igen, mehet</button>
+      </div>
+    </div>
+  </div>
+}

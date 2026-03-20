@@ -1,0 +1,207 @@
+@charset "UTF-8";
+/* --- VÁLTOZÓK --- */
+/* --- NAVBAR ALAPOK --- */
+.navbar {
+  background-color: #FE7F2D;
+  height: 85px;
+  padding: 0;
+  z-index: 1030;
+}
+.navbar .btn-login {
+  background-color: #235B5E;
+  color: white;
+  padding: 0.5rem;
+}
+.navbar .brand-text {
+  font-family: "Dancing Script", cursive;
+  font-size: 1.8rem;
+  color: white;
+  margin-left: 10px;
+  line-height: 1;
+}
+.navbar .mobile-menu-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 2.5rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* --- ASZTALI NÉZET (992px felett) --- */
+@media (min-width: 992px) {
+  .nav-icons-container {
+    display: flex;
+    align-items: center;
+    height: 70px;
+    gap: 8px;
+  }
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 85px;
+    height: 70px;
+    text-decoration: none;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+  }
+  .nav-item .nav-icon {
+    font-size: 2rem;
+    color: #235B5E;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+  }
+  .nav-item .nav-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: white;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+  }
+  .nav-item:hover .nav-icon, .nav-item.active-link .nav-icon {
+    color: white !important;
+    transform: translateY(0) !important;
+  }
+  .nav-item:hover .nav-label, .nav-item.active-link .nav-label {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+  /* DROPDOWN JAVÍTVA */
+  .profile-dropdown {
+    display: flex;
+    align-items: center;
+    height: 70px;
+  }
+  .profile-dropdown .profile-trigger {
+    cursor: pointer;
+  }
+  .profile-dropdown .profile-trigger .chevron-icon {
+    font-size: 0.85rem;
+    color: white;
+    margin-left: 4px;
+    margin-top: 6px;
+    transition: transform 0.3s ease;
+    transform: rotate(180deg);
+  }
+  .profile-dropdown.show .chevron-icon, .profile-dropdown .profile-trigger.show .chevron-icon {
+    transform: rotate(0deg) !important;
+  }
+  .profile-dropdown.show .nav-item .nav-icon, .profile-dropdown .profile-trigger.show .nav-item .nav-icon {
+    color: white !important;
+    transform: translateY(0) !important;
+  }
+  .profile-dropdown.show .nav-item .nav-label, .profile-dropdown .profile-trigger.show .nav-item .nav-label {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+  .profile-dropdown.active-link .nav-item .nav-icon {
+    color: white !important;
+    transform: translateY(0) !important;
+  }
+  .profile-dropdown.active-link .nav-item .nav-label {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+  .dropdown-menu.custom-dropdown {
+    background-color: #FE7F2D;
+    border: none;
+    border-radius: 12px;
+    min-width: 200px;
+    padding: 0;
+    margin-top: 5px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+  }
+  .dropdown-menu.custom-dropdown .dropdown-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    font-weight: 600;
+    color: white;
+  }
+  .dropdown-menu.custom-dropdown .dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+  .dropdown-menu.custom-dropdown .dropdown-item i {
+    font-size: 1.4rem;
+    color: #235B5E;
+  }
+  .dropdown-menu.custom-dropdown .logout-section {
+    background-color: #235B5E;
+  }
+  .dropdown-menu.custom-dropdown .logout-section .logout-btn {
+    width: 100%;
+    padding: 15px 20px;
+    font-weight: 700;
+    color: white;
+    background: transparent;
+    border: none;
+    text-align: left;
+  }
+  .dropdown-menu.custom-dropdown .logout-section .logout-btn:hover {
+    background-color: rgba(0, 0, 0, 0.15);
+  }
+}
+/* --- MOBIL NÉZET (992px alatt) --- */
+.mobile-sidebar {
+  background-color: #223843 !important;
+  width: 280px !important;
+  border: none;
+}
+.mobile-sidebar .btn-close-custom {
+  background: transparent;
+  border: none;
+  color: #FE7F2D;
+  font-size: 2.2rem;
+  padding: 20px;
+}
+.mobile-sidebar .mobile-nav-list {
+  list-style: none;
+  padding: 0 30px;
+  margin-top: 20px;
+}
+.mobile-sidebar .mobile-nav-list li {
+  margin-bottom: 30px;
+}
+.mobile-sidebar .mobile-nav-list li a {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: white;
+  text-decoration: none;
+  font-size: 1.8rem;
+}
+.mobile-sidebar .mobile-nav-list li a i {
+  font-size: 2.4rem;
+  width: 40px;
+  text-align: center;
+}
+.mobile-sidebar .mobile-nav-list li a.active {
+  color: #FE7F2D;
+}
+.mobile-sidebar .mobile-nav-list li a.active i {
+  color: #FE7F2D;
+}
+.mobile-sidebar .mobile-logout-wrapper {
+  position: absolute;
+  bottom: 40px;
+  width: 100%;
+  padding: 0 30px;
+}
+.mobile-sidebar .mobile-logout-wrapper .logout-btn {
+  width: calc(100% - 60px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ff4d4d;
+  padding: 15px;
+  border-radius: 10px;
+  font-weight: 700;
+}/*# sourceMappingURL=navbar.css.map */

@@ -1,0 +1,128 @@
+<div class="recipe-add-container py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-xl-8">
+                <div class="form-card shadow-lg">
+
+                    <div class="form-header">
+                        <div class="header-icon"><i class="bi bi-plus-circle-fill"></i></div>
+                        <h2>Új recept létrehozása</h2>
+                        <p>Töltsd ki az adatokat és oszd meg a főztöd!</p>
+                    </div>
+
+                    <div class="form-body p-4 p-md-5">
+
+                        <div class="form-section mb-5">
+                            <h4 class="section-title">1. Alapadatok</h4>
+
+                            <div class="row g-4">
+                                <div class="col-12">
+                                    <div class="input-group-custom">
+                                        <label>Recept neve</label>
+                                        <input type="text" [(ngModel)]="recipeName"
+                                            placeholder="pl. Tejszínes gombás tészta">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="input-group-custom">
+                                        <label>Kép feltöltése</label>
+                                        <div class="file-upload-wrapper">
+                                            <input type="file" accept="image/*" (change)="onFileSelected($event)"
+                                                id="recipeImage">
+                                            <label for="recipeImage" class="file-label">
+                                                <i class="bi bi-camera-fill me-2"></i> Kép választása
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 d-flex align-items-end">
+                                    @if (imagePreview()) {
+                                    <div class="image-preview-wrapper shadow-sm w-100">
+                                        <img [src]="imagePreview()" alt="Előnézet">
+                                        <button class="remove-img-btn" (click)="removeImage()"><i
+                                                class="bi bi-x"></i></button>
+                                    </div>
+                                    } @else {
+                                    <div class="image-placeholder w-100">
+                                        <i class="bi bi-image"></i>
+                                        <span>Nincs kép választva</span>
+                                    </div>
+                                    }
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="input-group-custom">
+                                        <label>Elkészítés leírása</label>
+                                        <textarea rows="4" [(ngModel)]="recipeDescription"
+                                            placeholder="Írd le a lépéseket..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h4 class="section-title">2. Hozzávalók</h4>
+
+                            <div class="custom-dropdown-container position-relative mb-4">
+                                <div class="search-box">
+                                    <i class="bi bi-search search-icon"></i>
+                                    <input type="text" [ngModel]="ingredientSearchTerm()"
+                                        (ngModelChange)="ingredientSearchTerm.set($event); isDropdownOpen.set(true)"
+                                        (focus)="isDropdownOpen.set(true)"
+                                        placeholder="Keress alapanyagot (pl. liszt, tojás...)">
+                                </div>
+
+                                @if (isDropdownOpen() && filteredAvailableIngredients().length > 0) {
+                                <div class="dropdown-results shadow-lg border">
+                                    @for (ing of filteredAvailableIngredients(); track ing.id) {
+                                    <div class="dropdown-item d-flex justify-content-between align-items-center"
+                                        (click)="selectIngredient(ing)">
+                                        <span class="fw-bold">{{ ing.name }}</span>
+                                        <small class="text-muted">{{ ing.unit }}</small>
+                                    </div>
+                                    }
+                                </div>
+                                }
+                            </div>
+
+                            <div class="ingredients-grid row g-3">
+                                @for (ing of ingredients(); track ing.id; let i = $index) {
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="ingredient-card animate-in shadow-sm">
+                                        <div class="ing-header">
+                                            <span class="name">{{ ing.name }}</span>
+                                            <button class="delete-btn" (click)="removeIngredient(i)"><i
+                                                    class="bi bi-x-circle"></i></button>
+                                        </div>
+                                        <div class="ing-body">
+                                            <input type="number" [(ngModel)]="ingredients()[i].amount" min="1">
+                                            <span class="unit">{{ ing.unit }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                } @empty {
+                                <div class="col-12">
+                                    <div class="empty-state text-center py-4">
+                                        <i class="bi bi-basket2"></i>
+                                        <p>Még nem adtál hozzá semmit.</p>
+                                    </div>
+                                </div>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="form-footer text-center mt-5">
+                            <button class="btn-save-recipe shadow" (click)="saveRecipe()">
+                                <span>Recept mentése</span>
+                                <i class="bi bi-check-circle-fill ms-2"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

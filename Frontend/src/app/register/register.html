@@ -1,0 +1,57 @@
+<div class="login-page">
+  <div class="login-card">
+    <header class="logo-section">
+      <img src="assets/logo.png" alt="Recept+ Logo" class="main-logo">
+      <h1 class="brand-name">Recept +</h1>
+      <span class="page-subtitle">Regisztráció</span>
+    </header>
+
+    <form class="login-form" (submit)="$event.preventDefault()">
+      <div class="input-wrapper">
+        <i class="bi bi-person input-icon"></i>
+        <input type="text" placeholder="Teljes név" [(ngModel)]="name" name="name" required>
+      </div>
+
+      <div class="input-wrapper">
+        <i class="bi bi-at input-icon"></i>
+        <input type="text" placeholder="Felhasználónév" [(ngModel)]="userName" name="userName" required>
+      </div>
+
+      <div class="input-wrapper">
+        <i class="bi bi-envelope input-icon"></i>
+        <input type="email" placeholder="E-mail cím" [(ngModel)]="email" name="email" required>
+      </div>
+
+      <div class="input-wrapper">
+        <i class="bi bi-lock input-icon"></i>
+        <input [type]="showPassword ? 'text' : 'password'" placeholder="Jelszó" [(ngModel)]="password" name="password" required>
+        <i class="bi password-toggle" 
+           [class.bi-eye]="!showPassword" 
+           [class.bi-eye-slash]="showPassword"
+           (click)="togglePassword()"></i>
+      </div>
+
+      <div class="input-wrapper">
+        <i class="bi bi-shield-lock input-icon"></i>
+        <input [type]="showPassword ? 'text' : 'password'" placeholder="Jelszó megerősítése" [(ngModel)]="confirmPassword" name="confirmPassword" required>
+      </div>
+
+      <div class="setup-info-box">
+        <i class="bi bi-info-circle-fill"></i>
+        <p>A profilképedet és a testalkati adataidat a regisztráció után, a <strong>Fiók</strong> menüpontban tudod majd megadni.</p>
+      </div>
+
+
+      <button type="submit" 
+              [class]="(email && password && password === confirmPassword) ? 'submit-btn' : 'submit-btn-disabled'"
+              (click)="registerButtonPressed()">
+        Regisztráció
+      </button>
+
+      <div class="form-footer">
+        <p>Van már fiókod?</p>
+        <button type="button" class="footer-link" (click)="goToLogin()">Jelentkezz be!</button>
+      </div>
+    </form>
+  </div>
+</div>

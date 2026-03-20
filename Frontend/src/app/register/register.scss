@@ -1,0 +1,99 @@
+$bg-light: #f4f8eb;
+$dark-teal: #235B5E;
+$comment-orange: #FE7F2D;
+$white: #ffffff;
+$transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+.login-page {
+  background-color: $bg-light;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.logo-section {
+  margin-bottom: 35px;
+  .main-logo { width: 80px; filter: invert(56%) sepia(59%) saturate(2250%) hue-rotate(345deg) brightness(101%) contrast(99%); }
+  .brand-name { font-family: 'Dancing Script', cursive; color: $dark-teal; font-size: 3.5rem; margin: 0; }
+  .page-subtitle { color: $dark-teal; font-size: 0.75rem; letter-spacing: 3px; opacity: 0.5; font-weight: 700; text-transform: uppercase; }
+}
+
+.login-form {
+  .input-wrapper {
+    position: relative;
+    margin-bottom: 25px;
+    border-bottom: 2px solid rgba($dark-teal, 0.2);
+    transition: $transition;
+    text-align: left;
+
+    input {
+      width: 100%; padding: 12px 35px; background: transparent; border: none; outline: none; color: $dark-teal; font-size: 1.1rem;
+      &:focus { border-bottom-color: $comment-orange; }
+    }
+    .input-icon { position: absolute; left: 0; top: 50%; transform: translateY(-50%); color: $dark-teal; font-size: 1.2rem; }
+    .password-toggle { position: absolute; right: 0; top: 50%; transform: translateY(-50%); cursor: pointer; color: $dark-teal; opacity: 0.6; &:hover { color: $comment-orange; opacity: 1; } }
+  }
+
+  /* ÚJ INFO BOX STÍLUSA */
+  .setup-info-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: rgba($dark-teal, 0.05);
+    padding: 12px 15px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    text-align: left;
+
+    i {
+      color: $comment-orange;
+      font-size: 1.1rem;
+      margin-top: 2px;
+    }
+
+    p {
+      margin: 0;
+      font-size: 0.8rem;
+      color: $dark-teal;
+      line-height: 1.4;
+      opacity: 0.8;
+      
+      strong {
+        font-weight: 700;
+        opacity: 1;
+      }
+    }
+  }
+
+  .form-options {
+    display: flex; justify-content: center; margin-bottom: 35px;
+    .option-link { font-size: 0.85rem; color: $dark-teal; opacity: 0.5; font-style: italic; }
+  }
+
+  .submit-btn, .submit-btn-disabled {
+    width: 85%; padding: 14px; border-radius: 25px; font-size: 1.1rem; font-weight: 700; border: none; transition: $transition;
+  }
+  .submit-btn {
+    background: $comment-orange; color: $white; box-shadow: 0 8px 20px rgba($comment-orange, 0.3); cursor: pointer;
+    &:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba($comment-orange, 0.4); }
+  }
+  .submit-btn-disabled { background: #d1d5db; color: $white; cursor: not-allowed; }
+}
+
+.form-footer {
+  margin-top: 45px;
+  p { font-size: 0.9rem; color: $dark-teal; opacity: 0.6; margin-bottom: 5px; }
+  .footer-link {
+    all: unset; font-family: 'Dancing Script', cursive; color: $dark-teal; font-size: 1.8rem;
+    cursor: pointer; font-weight: 700; transition: $transition;
+    &:hover { color: $comment-orange; transform: scale(1.1); }
+  }
+}

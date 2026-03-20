@@ -1,0 +1,14 @@
+<div class="search-container container">
+  <div class="search-wrapper small-search">
+    <input 
+      type="text" 
+      class="search-input" 
+      placeholder="Recept keresése..."
+      [value]="recipeService.searchTerm()" 
+      (input)="onSearchChange($event)"
+    >
+    <button class="search-button">
+      <i class="bi bi-search"></i>
+    </button>
+  </div>
+</div>

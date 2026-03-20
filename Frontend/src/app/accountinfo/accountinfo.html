@@ -1,0 +1,104 @@
+<div class="container profile-container py-5">
+  <div class="row justify-content-center mb-4">
+    <div class="col-auto text-center">
+      <div class="avatar-wrapper">
+        <div class="avatar-upload" (click)="fileInputClick(fileInput)">
+          @if (loggedInUser()?.profilePictureUrl) {
+            <img [src]="loggedInUser()?.profilePictureUrl" class="avatar-img">
+          } @else {
+            <i class="bi bi-person-fill"></i>
+          }
+          <div class="overlay"><i class="bi bi-camera-fill"></i></div>
+        </div>
+        <input #fileInput type="file" (change)="onFileSelected($event)" hidden>
+      </div>
+      <h2 class="mt-3 username-display">{{loggedInUser()?.username}}</h2>
+    </div>
+  </div>
+
+  <div class="row g-4 mb-5">
+    
+    <div class="col-md-4 order-first order-md-3">
+      <div class="info-card h-100 calorie-card">
+        <h5>Mai kalória</h5>
+        <div class="calorie-main">
+          <span class="value">{{ loggedInUser()?.caloriesEaten }}</span>
+          <span class="unit">kcal</span>
+        </div>
+        <div class="progress-container">
+          <div class="progress-bar">
+            <div class="progress-fill" [style.width.%]="(loggedInUser()?.caloriesEaten! / loggedInUser()?.calorieGoal!) * 100"></div>
+          </div>
+          <p class="small text-center mt-2 opacity-75">Cél: {{ loggedInUser()?.calorieGoal }} kcal</p>
+        </div>
+        <button class="btn-reset" (click)="resetCalories()">
+          <i class="bi bi-arrow-counterclockwise"></i> Újrakezdés
+        </button>
+      </div>
+    </div>
+
+    <div class="col-md-4 order-2 order-md-1">
+      <div class="info-card h-100">
+        <div class="card-icon"><i class="bi bi-person-badge"></i></div>
+        <h5>Személyes profil</h5>
+        <div class="info-list">
+          <div class="info-item"><span>Név:</span> <strong>{{loggedInUser()?.name}}</strong></div>
+          <div class="info-item"><span>E-mail:</span> <strong>{{ loggedInUser()?.email }}</strong></div>
+          <div class="info-item"><span>Szülinap:</span> <strong>{{ loggedInUser()?.birthDate }}</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 order-3 order-md-2">
+      <div class="info-card h-100">
+        <div class="card-icon"><i class="bi bi-activity"></i></div>
+        <h5>Testadatok</h5>
+        <div class="info-list">
+          <div class="info-item"><span>Testsúly:</span> <strong>{{ loggedInUser()?.bodyweightKg }} kg</strong></div>
+          <div class="info-item"><span>Magasság:</span> <strong>{{ loggedInUser()?.heightCm }} cm</strong></div>
+          <div class="info-item bmi-box mt-2">
+            <span>BMI Index:</span> 
+            <strong [class]="'bmi-value ' + getBmiClass()">{{ loggedInUser()?.bmi }}</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4 justify-content-center">
+    <div class="col-lg-7">
+      <div class="edit-card shadow-sm">
+        <h5 class="mb-4"><i class="bi bi-pencil-square me-2"></i>Adatok frissítése</h5>
+        <div class="row g-3">
+          <div class="col-md-12">
+            <label class="form-label">Születési dátum</label>
+            <input type="date" class="form-control custom-input" [(ngModel)]="birthDate">
+          </div>
+          <div class="col-6">
+            <label class="form-label">Magasság (cm)</label>
+            <input type="number" class="form-control custom-input" [(ngModel)]="height">
+          </div>
+          <div class="col-6">
+            <label class="form-label">Súly (kg)</label>
+            <input type="number" class="form-control custom-input" [(ngModel)]="bodyweight">
+          </div>
+          <div class="col-12 mt-4">
+            <button class="btn-save-profile w-100" (click)="updateUserData()">
+              Mentés
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-5">
+      <div class="delete-card shadow-sm text-center">
+        <h6 class="text-danger mb-3">Fiók törlése</h6>
+        <p class="x-small text-muted mb-4">Figyelem: Ez a művelet visszavonhatatlan, minden adatod elvész.</p>
+        <button class="btn-delete-account" (click)="deleteUser()">
+          Felhasználó végleges törlése
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
