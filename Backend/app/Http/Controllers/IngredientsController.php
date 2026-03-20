@@ -8,17 +8,11 @@ use Illuminate\Support\Facades\Validator;
 
 class IngredientsController extends Controller
 {
-    /**
-     * Összes ingredient
-     */
     public function index()
     {
         return Ingredients::all();
     }
 
-    /**
-     * Új ingredient létrehozása
-     */
     public function store(Request $request)
     {
         $validator = Validator::make(
@@ -26,13 +20,13 @@ class IngredientsController extends Controller
             [
                 'name' => 'required',
                 'isFruit' => 'required',
-                'kcalPerGram' => 'required'
+                'kcalPerGram' => 'required',
             ]
         );
 
         if ($validator->fails()) {
             return response()->json(
-                ["Hiba!" => "Legalább egy elemet kihagytál!"],
+                ['Hiba!' => 'Legalább egy elemet kihagytál!'],
                 401
             );
         }
@@ -40,21 +34,18 @@ class IngredientsController extends Controller
         Ingredients::create($request->all());
 
         return response()->json(
-            ["Sikeres feltöltés"],
+            ['Sikeres feltöltés'],
             201
         );
     }
 
-    /**
-     * Ingredient frissítése
-     */
     public function update(Request $request, $ingredientId)
     {
         $ingredient = Ingredients::find($ingredientId);
 
-        if (!$ingredient) {
+        if (! $ingredient) {
             return response()->json(
-                ["Hiba!" => "Nincs ilyen alapanyag az adatbázisban!"],
+                ['Hiba!' => 'Nincs ilyen alapanyag az adatbázisban!'],
                 404
             );
         }
@@ -64,13 +55,13 @@ class IngredientsController extends Controller
             [
                 'name' => 'required',
                 'isFruit' => 'required',
-                'kcalPerGram' => 'required'
+                'kcalPerGram' => 'required',
             ]
         );
 
         if ($validator->fails()) {
             return response()->json(
-                ["Hiba!" => "Legalább egy elemet kihagytál!"],
+                ['Hiba!' => 'Legalább egy elemet kihagytál!'],
                 401
             );
         }
@@ -78,21 +69,18 @@ class IngredientsController extends Controller
         $ingredient->update($request->all());
 
         return response()->json(
-            ["Siker!" => "Alapanyag sikeresen frissítve!"],
+            ['Siker!' => 'Alapanyag sikeresen frissítve!'],
             200
         );
     }
 
-    /**
-     * Ingredient törlése
-     */
     public function destroy($ingredientId)
     {
         $ingredient = Ingredients::find($ingredientId);
 
-        if (!$ingredient) {
+        if (! $ingredient) {
             return response()->json(
-                ["Hiba!" => "Nincs ilyen alapanyag az adatbázisban!"],
+                ['Hiba!' => 'Nincs ilyen alapanyag az adatbázisban!'],
                 404
             );
         }
@@ -100,21 +88,18 @@ class IngredientsController extends Controller
         $ingredient->delete();
 
         return response()->json(
-            ["Siker!" => "Alapanyag sikeresen törölve!"],
+            ['Siker!' => 'Alapanyag sikeresen törölve!'],
             200
         );
     }
 
-    /**
-     * Ingredient lekérése ID alapján
-     */
     public function getById($ingredientId)
     {
         $searched = Ingredients::where('id', '=', $ingredientId)->first();
 
         if (is_null($searched)) {
             return response()->json(
-                ["Hiba!" => "Nincs ilyen alapanyag ezzel az Id-val!"],
+                ['Hiba!' => 'Nincs ilyen alapanyag ezzel az Id-val!'],
                 404
             );
         }
@@ -122,16 +107,13 @@ class IngredientsController extends Controller
         return response()->json($searched, 200);
     }
 
-    /**
-     * Csak gyümölcsök
-     */
     public function getFruits()
     {
         $ingredients = Ingredients::where('isFruit', '=', true)->get();
 
         if ($ingredients->isEmpty()) {
             return response()->json(
-                ["Hiba!" => "Nincs egyetlen gyümölcs sem!"],
+                ['Hiba!' => 'Nincs egyetlen gyümölcs sem!'],
                 404
             );
         }
@@ -139,16 +121,13 @@ class IngredientsController extends Controller
         return response()->json($ingredients, 200);
     }
 
-    /**
-     * Nem gyümölcs alapanyagok
-     */
     public function getNonFruits()
     {
         $ingredients = Ingredients::where('isFruit', '=', false)->get();
 
         if ($ingredients->isEmpty()) {
             return response()->json(
-                ["Hiba!" => "Nincs egyetlen nem gyümölcs alapanyag sem!"],
+                ['Hiba!' => 'Nincs egyetlen nem gyümölcs alapanyag sem!'],
                 404
             );
         }
@@ -156,16 +135,13 @@ class IngredientsController extends Controller
         return response()->json($ingredients, 200);
     }
 
-    /**
-     * Kcal/gram nagyobb mint
-     */
     public function MoreThan_kcalPerGram($value)
     {
         $ingredients = Ingredients::where('kcalPerGram', '>', $value)->get();
 
         if ($ingredients->isEmpty()) {
             return response()->json(
-                ["Hiba!" => "Nincs ennél nagyobb kcal/gram érték!"],
+                ['Hiba!' => 'Nincs ennél nagyobb kcal/gram érték!'],
                 404
             );
         }
@@ -173,20 +149,30 @@ class IngredientsController extends Controller
         return response()->json($ingredients, 200);
     }
 
-    /**
-     * Kcal/gram kisebb mint
-     */
     public function LessThan_kcalPerGram($value)
     {
         $ingredients = Ingredients::where('kcalPerGram', '<', $value)->get();
 
         if ($ingredients->isEmpty()) {
             return response()->json(
-                ["Hiba!" => "Nincs ennél kisebb kcal/gram érték!"],
+                ['Hiba!' => 'Nincs ennél kisebb kcal/gram érték!'],
                 404
             );
         }
 
         return response()->json($ingredients, 200);
+    }
+
+    public function getByName($name)
+    {
+        $ingredient = Ingredients::where('name', $name)->first();
+
+        if (! $ingredient) {
+            return response()->json([
+                'message' => 'Nincs ilyen hozzávaló',
+            ], 404);
+        }
+
+        return response()->json($ingredient);
     }
 }

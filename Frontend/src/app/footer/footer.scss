@@ -7,7 +7,6 @@ $comment-orange: #FE7F2D;
   display: flex;
   justify-content: center;
   align-items: center;
-  // Opcionális: sötét elválasztó vonal alul, ha a design kéri
   border-bottom: 2px solid #1a1a1a; 
 
   .footer-content {
@@ -19,16 +18,15 @@ $comment-orange: #FE7F2D;
 
     .footer-logo {
       img {
-        width: 5rem; // Igazítsd a logód méretéhez
+        width: 5rem;
         height: auto;
-        // Ha fehér körvonalas ikonod van, itt színezheted, ha SVG
         filter: brightness(0) invert(1); 
       }
     }
 
     .footer-text {
-      color: #235B5E; // A kártyáknál használt sötétzöld/teal szín
-      font-family: 'Dancing Script', cursive; // Hasonló kézírásos font
+      color: #235B5E; 
+      font-family: 'Dancing Script', cursive; 
       font-size: 2rem;
       margin: 0;
       font-weight: 400;

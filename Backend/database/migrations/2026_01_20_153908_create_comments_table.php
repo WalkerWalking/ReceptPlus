@@ -6,22 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->string('content');
-            $table->foreignId('recipeId')->references('id')->on('recipes');
-            $table->foreignId('userId')->references('id')->on('users');
+            $table->foreignId('recipeId')->references('id')->on('recipes')->onDelete('cascade');
+            $table->foreignId('userId')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('comments');

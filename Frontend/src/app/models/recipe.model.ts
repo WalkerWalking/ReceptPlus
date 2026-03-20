@@ -1,17 +1,3 @@
-/* export interface Ingredient {
-  name: string;
-  amount: string;
-}
-
-export interface Recipe {
-  id: number;
-  name: string;
-  imageUrl: string;
-  rating: number;
-  commentsCount: number;
-  ingredients: Ingredient[];
-} */
-
 
 export interface Recipe {
   id: number;
@@ -30,3 +16,4 @@ export interface RecipeIngredient{
   amount: number;
   unit: string;
 }
+

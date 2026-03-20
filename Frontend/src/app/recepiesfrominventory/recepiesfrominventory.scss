@@ -1,139 +1,143 @@
-// Színváltozók
 $bg-light: #f4f8eb;
 $dark-teal: #235B5E;
-$ingredient-green: #76C84D;
-$comment-orange: #FE7F2D;
-$orange-star: #FFB300;
+$primary-orange: #FE7F2D;
+$white: #ffffff;
+$success-green: #2ecc71;
+$text-muted: #6c757d;
 
-.recipe-section {
-    background-color: $bg-light;
-    padding: 60px 0;
-    min-height: 100vh;
-
-    .section-title {
-        font-size: 2.8rem;
-        color: #1a1a1a;
-        margin-bottom: 5px;
-        font-weight: 400;
-    }
-
-    .section-subtitle {
-        color: #666;
-        margin-bottom: 40px;
-        font-size: 1.1rem;
-    }
+.makeable-section {
+  background-color: $bg-light;
+  padding: 80px 0;
+  min-height: 100vh;
+  .text-start { text-align: left !important; }
+  .section-title {
+    font-size: 3.5rem;
+    color: $dark-teal;
+    font-weight: 800;
+    letter-spacing: -2px;
+    margin-bottom: 5px;
+  }
+  .section-subtitle {
+    color: $text-muted;
+    font-size: 1.1rem;
+  }
 }
 
-.recipe-card {
-    background: #fff;
-    border-radius: 30px;
+.recipe-card.ready-to-cook {
+  background: $white;
+  border-radius: 24px;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba($success-green, 0.1);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1) !important;
+    border-color: rgba($success-green, 0.3);
+    .recipe-img { transform: scale(1.08); }
+    .btn-go-recipe { 
+      background-color: $primary-orange !important; 
+      border-color: $primary-orange !important;
+      color: white !important;
+    }
+  }
+
+  .card-image-wrapper {
+    height: 230px;
     overflow: hidden;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.04);
-    height: 100%;
+    position: relative;
+    .recipe-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+    .status-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba($success-green, 0.95);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      backdrop-filter: blur(4px);
+    }
+  }
+
+  .card-content {
+    padding: 25px;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    transition: transform 0.3s ease;
-    cursor: pointer;
 
-    &:hover {
-        transform: translateY(-8px);
+    .recipe-name {
+      font-size: 1.5rem;
+      color: $dark-teal;
+      font-weight: 800;
+      margin: 0;
     }
 
-    .card-image img {
-        width: 100%;
-        height: 220px;
-        object-fit: cover;
+    .ingredients-preview {
+      margin: 20px 0;
+      
+      .preview-title {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        font-weight: 800;
+        color: $primary-orange;
+        margin-bottom: 10px;
+        letter-spacing: 0.5px;
+      }
+
+      .ingredient-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        li {
+          font-size: 0.9rem;
+          color: #444;
+          margin-bottom: 5px;
+          display: flex;
+          align-items: center;
+          .bi-dot { color: $primary-orange; font-size: 1.2rem; }
+          .amount { font-weight: 700; color: $dark-teal; margin-left: 4px; }
+        }
+        .more-items {
+          font-size: 0.8rem;
+          font-style: italic;
+          color: $text-muted;
+          margin-top: 5px;
+        }
+      }
     }
 
-    .card-content {
-        padding: 25px;
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
+    .card-footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-        .card-header-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
+      .recipe-stats {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: $text-muted;
+        i { color: $dark-teal; }
+      }
 
-            .recipe-name {
-                font-size: 1.4rem;
-                color: $dark-teal;
-                font-weight: 700;
-                margin: 0;
-            }
-
-            .rating {
-                color: $comment-orange;
-                font-weight: bold;
-                display: flex;
-                align-items: center;
-                gap: 6px;
-                font-size: 1.1rem;
-
-                img {
-                    width: 20px;
-                    height: 20px;
-                }
-            }
-        }
-
-        .ingredient-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            font-size: 0.95rem;
-            color: #444;
-            flex-grow: 1;
-
-            li {
-                margin-bottom: 5px;
-                line-height: 1.4;
-
-                .amount {
-                    color: $ingredient-green;
-                    font-weight: 600;
-                }
-            }
-        }
-
-        .card-footer-row {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 20px;
-
-            .btn-recipeSelect{
-                background-color: #FE7F2D;
-                color: #f4f8eb;
-            }
-
-            .comment-container {
-                position: relative;
-                // A konténer mérete marad, hogy a szövegnek legyen helye mozdulni
-                width: 50px;
-                height: 50px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-                .comment-bg {
-                    position: absolute;
-                    top: 10%; // Középre igazítás a 80%-os méret miatt
-                    left: 10%;
-                    width: 80%; // A kért 80%-os méret
-                    height: 80%;
-                    object-fit: contain;
-                }
-
-                .comment-text {
-                    position: relative;
-                    z-index: 1;
-                    font-size: 0.75rem; // Kicsit kisebb betű, hogy elférjen a kisebb buborékban
-                    font-weight: 800;
-                    color: $comment-orange;
-                }
-            }
-        }
+      .btn-go-recipe {
+        border: 2px solid $dark-teal;
+        background: transparent;
+        color: $dark-teal;
+        padding: 8px 20px;
+        border-radius: 12px;
+        font-weight: 700;
+        transition: all 0.3s ease;
+      }
     }
+  }
+}
+
+.no-recipe-state {
+  background: white;
+  border: 3px dashed #e9ecef;
 }

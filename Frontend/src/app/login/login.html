@@ -6,7 +6,7 @@
       <span class="page-subtitle">BEJELENTKEZÉS</span>
     </header>
 
-    <form class="login-form">
+    <form class="login-form" (submit)="$event.preventDefault()">
       <div class="input-wrapper">
         <i class="bi bi-envelope input-icon"></i>
         <input type="text" placeholder="E-mail cím" required [(ngModel)]="userEmail" name="email">
@@ -21,23 +21,62 @@
            (click)="togglePassword()"></i>
       </div>
 
-      <div class="withoutLogin">
-        <a routerLink="/withoutLogin">Folytatás bejelentkezés nélkül</a>
+      <div class="form-options">
+        <a routerLink="/withoutLogin" class="option-link">Bejelentkezés nélkül</a>
+        <a (click)="toggleForgotPasswordModal(true)" class="option-link highlight">Elfelejtett jelszó?</a>
       </div>
 
-      @if (userPassword.length != 0) {
-        <button type="submit" class="submit-btn" (click)="loginBtnPressed()" >Belépés</button>
-      }
-      @else {
-        <button class="submit-btn-disabled" disabled>Belépés</button>
-      }
+      <button [disabled]="userPassword.length === 0" 
+              [class.submit-btn]="userPassword.length > 0"
+              [class.submit-btn-disabled]="userPassword.length === 0"
+              (click)="loginBtnPressed()">
+        Belépés
+      </button>
 
       <div class="form-footer">
         <p>Nincs még fiókod?</p>
-        <button type="button" (click)="goToRegister()" class="footer-link">
-          Regisztrálj!
-        </button>
+        <button type="button" (click)="goToRegister()" class="footer-link">Regisztrálj!</button>
       </div>
     </form>
   </div>
 </div>
+
+@if (showForgotPasswordModal) {
+<div class="modal-overlay" (click)="toggleForgotPasswordModal(false)">
+  <div class="modal-card" (click)="$event.stopPropagation()">
+    
+    <button class="close-btn" (click)="toggleForgotPasswordModal(false)">
+      <i class="bi bi-x"></i>
+    </button>
+
+    <div class="modal-header">
+      <div class="modal-icon">
+        <i class="bi bi-envelope-at"></i>
+      </div>
+      <h3>Jelszó pótlása</h3>
+      <div class="header-line"></div>
+    </div>
+
+    <div class="modal-body">
+      <p class="modal-text">
+        Add meg az e-mail címed, és küldünk egy linket a jelszó módosításához.
+      </p>
+
+      <div class="input-wrapper modal-input enhanced">
+        <i class="bi bi-envelope-at input-icon"></i>
+        <input type="email" placeholder="pelda@email.hu" [(ngModel)]="resetEmail" name="resetEmail">
+      </div>
+
+      <button class="modal-btn-final" (click)="sendResetEmail()" [disabled]="isLoading">
+        @if (isLoading) {
+          <span class="custom-loader"></span> Feldolgozás...
+        } @else {
+          <i class="bi bi-send-fill me-2"></i> Küldés
+        }
+      </button>
+
+      <span class="modal-helper">Ellenőrizd a spam mappát is.</span>
+    </div>
+  </div>
+</div>
+}

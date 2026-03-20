@@ -7,10 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class users extends Model
 {
-    //Ez a jó model a userekhez
     use HasFactory;
     public $table = 'users';
     public $timestamps = false;
     public $guarded = [];    
 
+    public function ingredients()
+    {
+    return $this->belongsToMany(Ingredients::class, 'user_ingredient', 'userId', 'ingredientId')
+        ->withPivot('amount');
+    }
 }

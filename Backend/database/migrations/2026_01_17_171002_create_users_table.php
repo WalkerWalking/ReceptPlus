@@ -7,9 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
@@ -21,13 +19,12 @@ return new class extends Migration
             $table->integer('bodyweightKg')->nullable();
             $table->integer('heightCm')->nullable();
             $table->date('birthDate')->default(DB::raw('CURRENT_TIMESTAMP'))->nullable();
-            $table->string('profilePictureUrl',500)->nullable();
+            $table->text('profilePictureUrl')->nullable();
+            $table->integer('caloriesEaten')->default(0);
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+
     public function down(): void
     {
         Schema::dropIfExists('users');

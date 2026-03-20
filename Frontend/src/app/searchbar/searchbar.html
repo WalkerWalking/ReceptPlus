@@ -3,10 +3,12 @@
     <input 
       type="text" 
       class="search-input" 
-      placeholder="Recept keresés"
+      placeholder="Recept keresése..."
+      [value]="recipeService.searchTerm()" 
+      (input)="onSearchChange($event)"
     >
     <button class="search-button">
-      <img src="assets/search.png" alt="">
+      <i class="bi bi-search"></i>
     </button>
   </div>
 </div>

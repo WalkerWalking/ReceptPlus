@@ -6,22 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('ingredient_recipe', function (Blueprint $table) {
             $table->primary(['ingredientId','recipeId']);
             $table->foreignId('ingredientId')->references('id')->on('ingredients')->cascadeOnDelete();
             $table->foreignId('recipeId')->references('id')->on('recipes')->cascadeOnDelete();            
-            $table->integer('gramAmount');
+            $table->integer('amount');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('ingredient_recipe');

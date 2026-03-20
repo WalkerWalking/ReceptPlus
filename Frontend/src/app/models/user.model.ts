@@ -1,4 +1,4 @@
-export interface User{
+export interface User {
     id: number;
     passwrd: string;
     email: string;
@@ -9,4 +9,7 @@ export interface User{
     birthDate: string;
     profilePictureUrl: string;
     caloriesEaten: number;
+
+    bmi?: number;
+    calorieGoal?: number;
 }

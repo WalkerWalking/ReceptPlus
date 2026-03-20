@@ -1,61 +1,69 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from "@angular/router";
-import { Router } from '@angular/router';
+import { RouterLink, Router } from "@angular/router";
 import { AuthService } from '../auth-service';
+import { ToastService } from '../toastwindowservice';
 
 @Component({
   selector: 'app-register',
+  standalone: true,
   imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './register.html',
   styleUrl: './register.scss',
 })
 export class Register {
-
-  constructor(private router: Router, private auth:AuthService) { }
-
+  private router = inject(Router);
+  private auth = inject(AuthService);
+  private toast = inject(ToastService);
 
   showPassword = false;
-  showConfirmPassword = false;
+
+  name: string = "";
+  userName: string = "";
+  email: string = "";
+  password: string = "";
+  confirmPassword: string = "";
 
   togglePassword(): void {
     this.showPassword = !this.showPassword;
-    this.showConfirmPassword = !this.showConfirmPassword;
-
-  }
-
-  profileImageUrl: string | null = null;
-
-  onFileSelected(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.profileImageUrl = reader.result as string;
-      };
-      reader.readAsDataURL(file);
-    }
   }
 
   goToLogin() {
     this.router.navigate(['/login']);
   }
 
-  name:string = "";
-  userName:string = "";
-  email:string = "";
-  password:string = "";  
+  registerButtonPressed() {
+    if (!this.email || !this.password || !this.userName) {
+      this.toast.show('Kérjük, tölts ki minden kötelező mezőt!', 'info');
+      return;
+    }
 
-  registerButtonPressed(){
-    this.auth.registerUser({email: this.email, passwrd: this.password, name: this.name, username: this.userName}).subscribe({
-      next: (response) => {        
-        this.auth.loggedInUser.set(response.user);
+    if (this.password !== this.confirmPassword) {
+      this.toast.show('A két jelszó nem egyezik!', 'error');
+      return;
+    }
+
+    if (this.password.length < 6) {
+      this.toast.show('A jelszónak legalább 6 karakternek kell lennie!', 'info');
+      return;
+    }
+
+    this.auth.registerUser({ 
+      email: this.email, 
+      passwrd: this.password, 
+      name: this.name, 
+      username: this.userName 
+    }).subscribe({
+      next: (response) => {
+        this.auth.setLoggedInUser(response);
         this.auth.isLoggedIn.set(true);
-        this.router.navigate(['/loggedin']);
+        this.toast.show('Sikeres regisztráció! Üdvözlünk!', 'success');
+        this.router.navigate(['']);
       },
       error: (error) => {
-        alert(error.message);
+        this.toast.show('Nem sikerült a regisztráció!', 'error');
+        console.error('Regisztrációs hiba:', error);
       }
     });
   }

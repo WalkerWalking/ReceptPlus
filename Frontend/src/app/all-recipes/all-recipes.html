@@ -1,45 +1,70 @@
 <div class="recipe-section">
-    <div class="container">
-        <h1 class="section-title">Receptek</h1>
-        <p class="section-subtitle">Az alkalmazásban szereplő összes recept</p>
-
-        <div class="row g-4">
-            @for (recipe of recipes(); track recipe.id) {
-            <div class="col-lg-4 col-md-6">
-                <div class="recipe-card" (click)="goToRecipe(recipe)">
-                    <div class="card-image">
-                        <img [src]="recipe.imageUrl" [alt]="recipe.name">
-                    </div>
-
-                    <div class="card-content">
-                        <div class="card-header-row">
-                            <h2 class="recipe-name">{{ recipe.name }}</h2>                            
-                        </div>
-
-                        <ul class="ingredient-list">
-                            @for (ing of recipe.ingredients; track ing.name) {
-                            <li>
-                                {{ ing.name }}: <span class="amount">{{ ing.amount }} {{ing.unit}}</span>
-                            </li>
-                            } @empty {
-                            <li>Nincsenek hozzávalók.</li>
-                            }
-                        </ul>   
-                        <div class="card-footer-row">
-                            <div class="comment-container">
-                                <button type="button" class="btn btn-recipeSelect" (click)="goToRecipe(recipe)">
-                                    <i class="bi bi-arrow-return-right"></i>
-                                </button>
-                            </div>
-                        </div>                     
-                    </div>
-                </div>
-            </div>
-            } @empty {
-            <div class="col-12 text-center">
-                <p>Üres a recepttár...</p>
-            </div>
-            }
-        </div>
+  <div class="container">
+    <div class="header-content text-start mb-5">
+      <h1 class="section-title">Receptek</h1>
+      <p class="section-subtitle">Fedezd fel a közösség legjobb fogásait</p>
     </div>
+
+    <div class="row g-4">
+      @for (recipe of filteredRecipes(); track recipe.id) {
+      <div class="col-lg-4 col-md-6">
+        <div class="recipe-card shadow-sm" (click)="goToRecipe(recipe)">
+          <div class="card-image-wrapper">
+            <img [src]="recipe.imageUrl" [alt]="recipe.name" class="recipe-img">
+            
+            <div class="category-badge" [class.is-owner]="recipe.userId === auth.loggedInUser()?.id">
+              @if (recipe.userId === auth.loggedInUser()?.id) {
+                <i class="bi bi-person-heart me-1"></i> Sajátod
+              } @else {
+                <i class="bi bi-people me-1"></i> Közösségi
+              }
+            </div> 
+          </div>
+
+          <div class="card-content">
+            <div class="card-header-row mb-3">
+              <h2 class="recipe-name">{{ recipe.name }}</h2>
+            </div>
+
+            <div class="ingredients-preview">
+              <p class="preview-title">Hozzávalók:</p>
+              <ul class="ingredient-list">
+                @for (ing of recipe.ingredients.slice(0, 4); track ing.name) {
+                <li>
+                  <i class="bi bi-dot"></i> {{ ing.name }}: <span class="amount">{{ ing.amount }} {{ing.unit}}</span>
+                </li>
+                } @empty {
+                <li class="empty-msg">Nincsenek hozzávalók.</li>
+                }
+                @if (recipe.ingredients.length > 4) {
+                  <li class="more-items">+ további {{ recipe.ingredients.length - 4 }} összetevő</li>
+                }
+              </ul>
+            </div>
+
+            <div class="card-footer-row mt-auto pt-3 border-top">
+              <div class="recipe-stats">
+                <span>
+                  <i class="bi bi-clock-history me-1"></i> 
+                  ~{{ calculateSmartTime(recipe) }} perc
+                </span>
+              </div>
+              
+              <button type="button" class="btn-go-recipe">
+                Megnézem <i class="bi bi-arrow-right-short ms-1"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      } @empty {
+      <div class="col-12 text-center py-5">
+        <div class="empty-state">
+          <i class="bi bi-journal-x display-1 text-muted opacity-25"></i>
+          <p class="mt-3 fs-4 text-muted">Nem találtunk a keresésnek megfelelő receptet.</p>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
 </div>

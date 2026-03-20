@@ -8,17 +8,12 @@ use Illuminate\Support\Facades\Validator;
 
 class CommentController extends Controller
 {
-    /**
-     * Összes komment
-     */
+
     public function index()
     {
         return Comment::all();
     }
 
-    /**
-     * Új komment létrehozása
-     */
     public function store(Request $request)
     {
         $validator = Validator::make(
@@ -45,9 +40,6 @@ class CommentController extends Controller
         );
     }
 
-    /**
-     * Komment frissítése
-     */
     public function update(Request $request, $commentId)
     {
         $comment = Comment::find($commentId);
@@ -62,9 +54,7 @@ class CommentController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'content' => 'required',
-                'recipeId' => 'required',
-                'userId' => 'required'
+                'content' => 'required'
             ]
         );
 
@@ -83,9 +73,6 @@ class CommentController extends Controller
         );
     }
 
-    /**
-     * Komment törlése
-     */
     public function destroy($commentId)
     {
         $comment = Comment::find($commentId);
@@ -105,9 +92,6 @@ class CommentController extends Controller
         );
     }
 
-    /**
-     * Komment lekérése ID alapján
-     */
     public function getById($commentId)
     {
         $searched = Comment::where('id', '=', $commentId)->first();
@@ -122,26 +106,13 @@ class CommentController extends Controller
         return response()->json($searched, 200);
     }
 
-    /**
-     * Egy recepthez tartozó kommentek
-     */
     public function getByRecipeId($recipeId)
     {
-        $comments = Comment::where('recipeId', '=', $recipeId)->get();
-
-        if ($comments->isEmpty()) {
-            return response()->json(
-                ["Hiba!" => "Ehhez a recepthez nincs komment!"],
-                404
-            );
-        }
+        $comments = Comment::where('recipeId', '=', $recipeId)->get();        
 
         return response()->json($comments, 200);
     }
 
-    /**
-     * Egy user kommentjei
-     */
     public function getByUserId($userId)
     {
         $comments = Comment::where('userId', '=', $userId)->get();

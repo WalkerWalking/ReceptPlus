@@ -6,22 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('recipes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('userId')->references('id')->on('users');
-            $table->string('imageUrl')->nullable();
+            $table->foreignId('userId')->references('id')->on('users')->cascadeOnDelete();;
+            $table->text('imageUrl')->nullable();
+            $table->boolean('isMakeable')->default(false);
+            $table->text('description')->nullable();
+            $table->integer('calories')->default(0);
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('recipes');

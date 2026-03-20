@@ -4,7 +4,6 @@ $dark-teal: #235B5E;
 $mobile-navy: #223843;
 $transition-speed: 0.3s;
 
-/* --- NAVBAR ALAPOK --- */
 .navbar {
     background-color: $comment-orange;
     height: 85px;
@@ -36,7 +35,6 @@ $transition-speed: 0.3s;
     }
 }
 
-/* --- ASZTALI NÉZET (992px felett) --- */
 @media (min-width: 992px) {
     .nav-icons-container {
         display: flex;
@@ -81,7 +79,6 @@ $transition-speed: 0.3s;
         }
     }
 
-    /* DROPDOWN JAVÍTVA */
     .profile-dropdown {
         display: flex;
         align-items: center;
@@ -150,7 +147,6 @@ $transition-speed: 0.3s;
     }
 }
 
-/* --- MOBIL NÉZET (992px alatt) --- */
 .mobile-sidebar {
     background-color: $mobile-navy !important;
     width: 280px !important;

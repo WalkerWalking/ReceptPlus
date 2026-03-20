@@ -1,31 +1,40 @@
-import { Component, Signal } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router'; // Kell a navigációhoz
+import { Component, inject, Signal, OnInit } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../auth-service';
-import { User } from '../models/user.model';
+import { ToastService } from '../toastwindowservice';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive], // RouterLink-et használd href helyett
+  imports: [RouterLink, RouterLinkActive, CommonModule], 
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
 })
-export class Navbar {  
+export class Navbar implements OnInit {  
+  private router = inject(Router);
+  private auth = inject(AuthService);
+  private toast = inject(ToastService);
 
-  constructor(private router: Router, private auth: AuthService) {}
-
-  isLoggedIn!:Signal<boolean>;
+  isLoggedIn: Signal<boolean> = this.auth.isLoggedIn;
 
   ngOnInit() {
-    this.isLoggedIn = this.auth.isLoggedIn;
+    this.auth.restoreUser();
   }
 
   goToLogin() {
     this.router.navigate(['/login']);
   }
 
-  logout() {
-    this.auth.logout();
-    this.router.navigate(['/login']);
+  async logout() {
+    const confirmed = await this.toast.askConfirmation(
+      'Kijelentkezés',
+      'Biztosan el szeretnéd hagyni az alkalmazást?'
+    );
+
+    if (confirmed) {
+      this.auth.logout(); 
+      this.router.navigate(['/login']);
+    }
   }
 }

@@ -1,7 +1,8 @@
 $bg-light: #f4f8eb;
 $dark-teal: #235B5E;
 $comment-orange: #FE7F2D;
-$transition: all 0.2s ease-in-out;
+$white: #ffffff;
+$transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
 .login-page {
   background-color: $bg-light;
@@ -21,89 +22,120 @@ $transition: all 0.2s ease-in-out;
 .logo-section {
   margin-bottom: 35px;
   .main-logo { width: 80px; filter: invert(56%) sepia(59%) saturate(2250%) hue-rotate(345deg) brightness(101%) contrast(99%); }
-  .brand-name { font-family: 'Dancing Script', cursive; color: $dark-teal; font-size: 3rem; margin: 0; line-height: 1; }
-  .page-subtitle { color: $dark-teal; font-size: 0.8rem; letter-spacing: 2px; opacity: 0.6; display: block; margin-top: 5px; }
+  .brand-name { font-family: 'Dancing Script', cursive; color: $dark-teal; font-size: 3.5rem; margin: 0; }
+  .page-subtitle { color: $dark-teal; font-size: 0.75rem; letter-spacing: 3px; opacity: 0.5; font-weight: 700; text-transform: uppercase; }
 }
 
 .login-form {
   .input-wrapper {
     position: relative;
     margin-bottom: 25px;
-    border-bottom: 1.5px solid rgba($dark-teal, 0.4);
-
+    border-bottom: 2px solid rgba($dark-teal, 0.2);
+    transition: $transition;
     input {
-      width: 100%;
-      padding: 10px 35px;
-      background: transparent;
-      border: none;
-      outline: none;
-      color: $dark-teal;
-      font-size: 1.05rem;
-      transition: $transition;
+      width: 100%; padding: 12px 35px; background: transparent; border: none; outline: none; color: $dark-teal; font-size: 1.1rem;
+      &:focus { border-bottom-color: $comment-orange; }
+    }
+    .input-icon { position: absolute; left: 0; top: 50%; transform: translateY(-50%); color: $dark-teal; font-size: 1.2rem; }
+    .password-toggle { position: absolute; right: 0; top: 50%; transform: translateY(-50%); cursor: pointer; color: $dark-teal; opacity: 0.6; &:hover { color: $comment-orange; opacity: 1; } }
+  }
+
+  .form-options {
+    display: flex; justify-content: space-between; margin-bottom: 35px;
+    .option-link {
+      font-size: 0.85rem; color: $dark-teal; text-decoration: none; opacity: 0.7; cursor: pointer;
+      &:hover { opacity: 1; color: $comment-orange; }
+      &.highlight { font-weight: 700; }
+    }
+  }
+
+  .submit-btn, .submit-btn-disabled {
+    width: 75%; padding: 14px; border-radius: 25px; font-size: 1.1rem; font-weight: 700; border: none; transition: $transition;
+  }
+  .submit-btn {
+    background: $comment-orange; color: $white; box-shadow: 0 8px 20px rgba($comment-orange, 0.3); cursor: pointer;
+    &:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba($comment-orange, 0.4); }
+  }
+  .submit-btn-disabled { background: #d1d5db; color: $white; cursor: not-allowed; }
+}
+
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba($dark-teal, 0.65); backdrop-filter: blur(12px);
+  display: flex; justify-content: center; align-items: center; z-index: 9999; padding: 20px;
+}
+
+.modal-card {
+  background: $white; padding: 45px 35px; border-radius: 40px; width: 100%; max-width: 400px;
+  position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.15); text-align: center;
+  animation: modalPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  .close-btn {
+    position: absolute; top: 20px; right: 20px; background: #f8faf5; border: none;
+    width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: $transition; color: $dark-teal;
+    &:hover { background: $comment-orange; color: white; transform: rotate(90deg); }
+  }
+
+  .modal-header {
+    margin-bottom: 25px;
+    .modal-icon {
+      width: 70px; height: 70px; background: rgba($comment-orange, 0.1); color: $comment-orange;
+      border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;
+      i { font-size: 2rem; }
+    }
+    h3 { color: $dark-teal; font-size: 1.8rem; font-weight: 800; margin: 0; }
+    .header-line { width: 45px; height: 5px; background: $comment-orange; margin: 12px auto 0; border-radius: 10px; }
+  }
+
+  .modal-body {
+    .modal-text { color: #6a7c7d; font-size: 0.95rem; line-height: 1.6; margin-bottom: 30px; }
+
+    .modal-input.enhanced {
+      background: #f8faf5; border-radius: 16px; border: 1px solid rgba($dark-teal, 0.05);
+      margin-bottom: 25px; position: relative; transition: $transition;
       
-      &:focus { border-bottom: 1.5px solid $comment-orange; }
+      input {
+        width: 100%; padding: 14px 15px 14px 45px; border: none; outline: none;
+        background: transparent; color: $dark-teal; font-weight: 600; font-size: 1rem;
+        &::placeholder { color: #abb8b9; font-weight: 400; }
+      }
+      .input-icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: $dark-teal; opacity: 0.4; font-size: 1.2rem; }
+
+      &:focus-within {
+        background: $white; border-color: $comment-orange; box-shadow: 0 8px 20px rgba($comment-orange, 0.08);
+        .input-icon { color: $comment-orange; opacity: 1; }
+      }
     }
 
-    .input-icon { position: absolute; left: 0; top: 50%; transform: translateY(-50%); color: $dark-teal; font-size: 1.2rem; }
-    .password-toggle { position: absolute; right: 0; top: 50%; transform: translateY(-50%); cursor: pointer; color: $dark-teal; opacity: 0.7; transition: $transition; &:hover { color: $comment-orange; opacity: 1; } }
-  }
+    .modal-btn-final {
+      width: 100%; padding: 16px; border-radius: 18px; background: $comment-orange; color: white;
+      font-weight: 700; font-size: 1.1rem; border: none; cursor: pointer;
+      box-shadow: 0 10px 25px rgba($comment-orange, 0.3); transition: $transition;
+      display: flex; align-items: center; justify-content: center;
 
-  .withoutLogin {
-    text-align: right;
-    margin-top: -15px;
-    margin-bottom: 30px;
-    a { color: $dark-teal; font-size: 0.85rem; text-decoration: none; opacity: 0.8; transition: $transition; &:hover { color: $comment-orange; opacity: 1; } }
-  }
+      &:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 15px 30px rgba($comment-orange, 0.4); }
+      &:active { transform: translateY(-1px); }
+      &:disabled { background: #d1d5db; box-shadow: none; cursor: not-allowed; }
+    }
 
-  .submit-btn {
-    width: 60%; // Visszavettem az arányosabb szélességre
-    background: $comment-orange;
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 20px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: $transition;
-    box-shadow: 0 4px 10px rgba($comment-orange, 0.2);
-    
-    &:hover { background: darken($comment-orange, 5%); transform: translateY(-2px); box-shadow: 0 6px 15px rgba($comment-orange, 0.3); }
-    &:active { transform: translateY(0); }
-  }
-
-  .submit-btn-disabled {
-    width: 60%; 
-    background: gray;
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 20px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: $transition;
-    box-shadow: 0 4px 10px rgba($comment-orange, 0.2);
-    
+    .modal-helper { display: block; margin-top: 20px; font-size: 0.8rem; color: $dark-teal; opacity: 0.4; font-style: italic; }
   }
 }
 
+.custom-loader {
+  width: 18px; height: 18px; border: 2.5px solid rgba(255,255,255,0.3); border-top-color: white;
+  border-radius: 50%; display: inline-block; animation: spin 0.8s linear infinite; margin-right: 10px;
+}
+
+@keyframes modalPop { from { opacity: 0; transform: scale(0.9) translateY(30px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+
 .form-footer {
-  margin-top: 40px;
-  p { font-size: 0.9rem; color: $dark-teal; margin: 0; opacity: 0.7; }
-  
+  margin-top: 45px;
+  p { font-size: 0.9rem; color: $dark-teal; opacity: 0.6; }
   .footer-link {
-    all: unset; // EZ ÖLI KI A FEKETE KERETET!
-    font-family: 'Dancing Script', cursive;
-    color: $dark-teal;
-    font-size: 1.2rem; // Kicsit nagyobb, hogy jól nézzen ki a kézírás
-    cursor: pointer;
-    transition: $transition;
-    line-height: 1.2;
-    
-   &:hover {
-      color: $comment-orange;
-      transform: scale(1.1) rotate(-2deg); /* Egy kis játékos mozgás */
-    }
+    all: unset; font-family: 'Dancing Script', cursive; color: $dark-teal; font-size: 1.4rem;
+    cursor: pointer; font-weight: 700; transition: $transition;
+    &:hover { color: $comment-orange; transform: scale(1.1); }
   }
 }

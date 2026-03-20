@@ -5,7 +5,7 @@ $white: #ffffff;
 .search-container {
     width: 100%;
     display: flex;
-    justify-content: flex-end; // Ez tolja az egész hóbelevancot a jobb szélre
+    justify-content: flex-end;
     padding: 20px;
     box-sizing: border-box;
     margin-top: 1rem;
@@ -15,18 +15,18 @@ $white: #ffffff;
     display: flex;
     align-items: center;
     gap: 10px;
-    width: 600px; // Itt állítod be, mennyire legyen kicsi (pl. 300px)
+    width: 600px;
 }
 
 .search-input {
     flex-grow: 1;
     background-color: $primary-orange;
     border: none;
-    border-radius: 10px; // Kicsit finomabb lekerekítés a kisebb mérethez
+    border-radius: 10px; 
     padding: 8px 15px;
     color: $white;
-    font-size: 1rem; // Kisebb betű
-    height: 45px;   // Alacsonyabb profil
+    font-size: 1rem;
+    height: 45px;
 
     &::placeholder {
         color: rgba($white, 0.9);
@@ -43,14 +43,14 @@ $white: #ffffff;
     background-color: $dark-teal;
     color: $white;
     border: none;
-    width: 45px;  // Pontosan akkora, mint az input magassága
+    width: 45px; 
     height: 45px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    flex-shrink: 0; // Ne engedje összenyomni a kört
+    flex-shrink: 0;
 
     img {
         width: 95%;
