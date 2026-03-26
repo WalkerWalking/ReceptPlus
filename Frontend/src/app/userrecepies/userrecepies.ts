@@ -3,7 +3,7 @@ import { Recipe } from '../models/recipe.model';
 import { RecipeService } from '../recipe.service';
 import { Router, RouterLink } from '@angular/router';
 import { ToastService } from '../toastwindowservice';
-
+import { HostListener } from '@angular/core';
 @Component({
   selector: 'app-userrecepies',
   standalone: true,
@@ -29,6 +29,19 @@ export class Userrecepies implements OnInit {
       r.ingredients.some(i => i.name.toLowerCase().includes(term))
     );
   });
+
+scrollBottom = 56;
+
+  @HostListener('window:scroll', [])
+  onWindowScroll(): void {
+    const footer = document.querySelector('app-footer');
+    if (!footer) return;
+
+    const rect = footer.getBoundingClientRect();
+    const overlap = window.innerHeight - rect.top;
+
+    this.scrollBottom = overlap > 0 ? 56 + overlap : 56;
+  }
 
   ngOnInit() {
     this.loadUserRecipes();

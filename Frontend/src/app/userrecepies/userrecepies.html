@@ -29,8 +29,8 @@
                             <ul class="ingredient-list">
                                 @for (ing of recipe.ingredients.slice(0, 4); track ing.name) {
                                 <li>
-                                    <i class="bi bi-dot"></i> {{ ing.name }}: <span class="amount">{{ ing.amount }}
-                                        {{ing.unit}}</span>
+                                    <i class="bi bi-dot"></i> {{ ing.name }}: 
+                                    <span class="amount">{{ ing.amount }} {{ing.unit}}</span>
                                 </li>
                                 } @empty {
                                 <li class="empty-msg">Nincsenek hozzávalók.</li>
@@ -63,7 +63,10 @@
         </div>
     </div>
 
-    <button class="floating-add-btn shadow-lg" routerLink="/recipe-add">
+    <button 
+    class="floating-add-btn shadow-lg"
+    [style.bottom.px]="scrollBottom"
+    routerLink="/recipe-add">
         <span class="btn-text">Új recept</span>
         <i class="bi bi-plus-lg"></i>
     </button>

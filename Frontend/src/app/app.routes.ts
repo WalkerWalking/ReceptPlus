@@ -9,19 +9,22 @@ import { AllRecipes } from './all-recipes/all-recipes';
 import { RecipeFull } from './recipe-full/recipe-full';
 import { AddRecipe } from './add-recipe/add-recipe';
 import { Resetpasswordcomponent } from './resetpasswordcomponent/resetpasswordcomponent'; 
+import { Aboutuscomponent } from './aboutuscomponent/aboutuscomponent';
+import { AuthguardService } from './authguard-service';
 
 export const routes: Routes = [
   { path: '', component: AllRecipes },
   { path: 'login', component: Login },
   { path: 'register', component: Register },
-  { path: 'recipesFromInventory', component: Recepiesfrominventory },
-  { path: 'user-recipes', component: Userrecepies },
-  { path: 'user-storage', component: Userstorage },
-  { path: 'account', component: Accountinfo },
+  { path: 'recipesFromInventory', component: Recepiesfrominventory, canActivate: [AuthguardService] },
+  { path: 'user-recipes', component: Userrecepies, canActivate: [AuthguardService] },
+  { path: 'user-storage', component: Userstorage, canActivate: [AuthguardService] },
+  { path: 'account', component: Accountinfo, canActivate: [AuthguardService] },
   { path: 'allRecipes', component: AllRecipes },
   { path: 'recipe-full', component: RecipeFull },
-  { path: 'recipe-add', component: AddRecipe },
-  
+  { path: 'recipe-add', component: AddRecipe, canActivate: [AuthguardService] },
+  { path: 'about-us', component: Aboutuscomponent },
+
   { path: 'reset-password', component: Resetpasswordcomponent },
 
   { path: '**', redirectTo: '' }

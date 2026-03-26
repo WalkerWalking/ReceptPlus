@@ -26,7 +26,7 @@ export class RecipeFull implements OnInit {
   private toast = inject(ToastService);
 
   selectedRecipe!: Signal<Recipe | null>;
-  comments = signal<any[]>([]); 
+  comments = signal<any[]>([]);
   newCommentContent = '';
   errorMessage = signal<string | null>(null);
 
@@ -35,7 +35,7 @@ export class RecipeFull implements OnInit {
 
   ngOnInit() {
     this.selectedRecipe = this.recipeService.selectedRecipe;
-    
+
     if (this.selectedRecipe()) {
       this.loadComments();
     } else {
@@ -52,8 +52,8 @@ export class RecipeFull implements OnInit {
     if (!recipe) return;
 
     const confirmed = await this.toast.askConfirmation(
-      'Főzés indítása',
-      `Biztosan elkészíted a következőt: ${recipe.name}? Az alapanyagok le lesznek vonva a raktáradból!`
+      'Recept elkészítése',
+      `Biztosan elkészíted a következőt: ${recipe.name}? Amennyiben rendelkezel a szükséges alapanyagokkal, azok levonásra kerülnek a raktáradból.`
     );
 
     if (!confirmed) return;
@@ -63,7 +63,7 @@ export class RecipeFull implements OnInit {
         this.auth.loggedInUser.set(response.user);
         localStorage.setItem('loggedInUser', JSON.stringify(response.user));
         this.userStorageService.setUserIngredients(response.remainingIngredients);
-        
+
         this.toast.show("Jó étvágyat! A receptet sikeresen elkészítve! :3", "success");
       },
       error: (err) => {

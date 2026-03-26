@@ -168,13 +168,13 @@ class RecipeController extends Controller
 
         if (! $user) {
             return response()->json([
-                'message' => 'Felhasználó nem található',
+                'message' => 'A funkció eléréséhez jelentkezz be!',
             ], 404);
         }
 
         if (! $recipe) {
             return response()->json([
-                'message' => 'Recept nem található',
+                'message' => 'Recept nem található!',
             ], 404);
         }
 

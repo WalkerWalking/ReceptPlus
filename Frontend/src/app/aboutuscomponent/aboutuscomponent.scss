@@ -1,0 +1,227 @@
+$bg-light: #f4f8eb;
+$dark-teal: #235B5E;
+$comment-orange: #FE7F2D;
+$white: #ffffff;
+$transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+.about-wrapper {
+  background-color: $bg-light;
+  min-height: 100vh;
+  color: $dark-teal;
+  padding: 0 15px;
+
+  .hero-section {
+    padding: 4rem 0 2rem;
+
+    @media (min-width: 768px) {
+      padding: 6rem 0 4rem;
+    }
+
+    .lead{
+      max-width: 700px;
+    }
+    
+    .text-orange {
+      color: $comment-orange;
+      font-weight: 700;
+      letter-spacing: 2px;
+      font-size: 0.85rem;
+
+      @media (min-width: 768px) {
+        letter-spacing: 3px;
+        font-size: 1rem;
+      }
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      
+      @media (min-width: 768px) {
+        font-size: 3.5rem;
+      }
+    }
+  }
+
+  .profile-card {
+    background: $white;
+    border-radius: 30px;
+    padding: 2rem;
+    height: 100%;
+    position: relative;
+    box-shadow: 0 15px 45px rgba($dark-teal, 0.05);
+    transition: $transition;
+    border: 1px solid rgba($dark-teal, 0.05);
+    margin-bottom: 2rem;
+
+    @media (min-width: 768px) {
+      padding: 3rem;
+      margin-bottom: 0;
+    }
+
+    &:hover {
+      @media (min-width: 992px) {
+        transform: translateY(-15px);
+        box-shadow: 0 30px 70px rgba($dark-teal, 0.12);
+        
+        .image-box i.bi-person-bounding-box {
+          color: $comment-orange;
+        }
+      }
+    }
+
+    .image-box {
+      width: 100px;
+      height: 100px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      position: relative;
+
+      @media (min-width: 768px) {
+        width: 120px;
+        height: 120px;
+        border-radius: 25px;
+        margin-bottom: 2rem;
+      }
+
+      img{
+        max-width: 100%;
+        border-radius: 32px;
+      }
+
+      i.bi-person-bounding-box {
+        font-size: 2.8rem;
+        transition: $transition;
+
+        @media (min-width: 768px) {
+          font-size: 3.5rem;
+        }
+      }
+
+      .quote-icon {
+        position: absolute;
+        bottom: -8px;
+        right: -8px;
+        width: 32px;
+        height: 32px;
+        background: $comment-orange;
+        color: $white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        box-shadow: 0 4px 10px rgba($comment-orange, 0.3);
+
+        @media (min-width: 768px) {
+          width: 40px;
+          height: 40px;
+          bottom: -10px;
+          right: -10px;
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    .name {
+      font-weight: 800;
+      font-size: 1.5rem;
+      margin-bottom: 0.2rem;
+
+      @media (min-width: 768px) {
+        font-size: 2rem;
+      }
+    }
+
+    .tagline {
+      color: lighten($dark-teal, 20%);
+      font-weight: 500;
+      font-size: 1rem;
+      margin-bottom: 1.2rem;
+
+      @media (min-width: 768px) {
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    .accent-line {
+      width: 40px;
+      height: 3px;
+      background: $comment-orange;
+      border: none;
+      opacity: 1;
+      margin-bottom: 1.5rem;
+    }
+
+    .description {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      color: rgba($dark-teal, 0.85);
+
+      @media (min-width: 768px) {
+        font-size: 1.05rem;
+        line-height: 1.7;
+        margin-bottom: 2rem;
+      }
+    }
+
+    .personal-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      margin-bottom: 1.5rem;
+
+      @media (min-width: 768px) {
+        gap: 0.8rem;
+        margin-bottom: 2rem;
+      }
+
+      .info-item {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        font-weight: 600;
+        font-size: 0.85rem;
+
+        @media (min-width: 768px) {
+          font-size: 0.9rem;
+        }
+
+        i {
+          color: $comment-orange;
+        }
+      }
+    }
+
+    .social-footer {
+      display: flex;
+      gap: 1.2rem;
+      border-top: 1px solid rgba($dark-teal, 0.1);
+      padding-top: 1.2rem;
+
+      @media (min-width: 768px) {
+        gap: 1.5rem;
+        padding-top: 1.5rem;
+      }
+
+      a {
+        color: $dark-teal;
+        font-size: 1.2rem;
+        transition: $transition;
+
+        @media (min-width: 768px) {
+          font-size: 1.4rem;
+        }
+
+        &:hover {
+          color: $comment-orange;
+          transform: scale(1.2);
+        }
+      }
+    }
+  }
+}

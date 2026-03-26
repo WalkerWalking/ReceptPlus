@@ -24,10 +24,18 @@
     !router.url.startsWith('/register') &&
     !router.url.startsWith('/reset-password')) {
 
-    <div class="col-12">
+    <div class="col-12" #footerRef>
       <app-footer></app-footer>
     </div>
     }
 
   </div>
+
+  <button 
+    class="scroll-to-top" 
+    [class.visible]="showScrollButton"
+    [style.bottom.px]="scrollBottom"
+    (click)="scrollToTop()">
+    <i class="bi bi-chevron-up"></i>
+  </button>
 </div>
