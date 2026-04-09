@@ -161,6 +161,7 @@ $transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
       line-height: 1.6;
       margin-bottom: 1.5rem;
       color: rgba($dark-teal, 0.85);
+      text-indent: 0.5rem;
 
       @media (min-width: 768px) {
         font-size: 1.05rem;

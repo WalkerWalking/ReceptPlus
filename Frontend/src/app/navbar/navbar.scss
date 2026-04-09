@@ -151,30 +151,52 @@ $transition-speed: 0.3s;
     background-color: $mobile-navy !important;
     width: 280px !important;
     border: none;
+    overflow: hidden !important; 
+
+    .offcanvas-body {
+        display: flex !important;
+        flex-direction: column !important;
+        padding: 0 !important;
+        height: 100% !important;
+        overflow: hidden !important; 
+    }
 
     .btn-close-custom {
         background: transparent;
         border: none;
         color: $comment-orange;
-        font-size: 2.2rem;
-        padding: 20px;
+        font-size: clamp(1.8rem, 5vh, 2.2rem);
+        padding: clamp(10px, 3vh, 20px);
+        flex-shrink: 0;
+        align-self: flex-end;
     }
 
     .mobile-nav-list {
         list-style: none;
         padding: 0 30px;
-        margin-top: 20px;
+        margin: 0;
+        flex-grow: 1;
+        overflow-y: hidden !important; 
 
         li {
-            margin-bottom: 30px;
+            margin-bottom: clamp(15px, 3vh, 25px); 
+            
+            &:first-child { margin-top: 5px; }
+            
             a {
                 display: flex;
                 align-items: center;
-                gap: 20px;
+                gap: 15px;
                 color: white;
                 text-decoration: none;
-                font-size: 1.8rem;
-                i { font-size: 2.4rem; width: 40px; text-align: center; }
+                font-size: clamp(1.3rem, 4vh, 1.6rem); 
+
+                i { 
+                    font-size: clamp(1.8rem, 5vh, 2.2rem); 
+                    width: 35px; 
+                    text-align: center; 
+                }
+                
                 &.active {
                     color: $comment-orange;
                     i { color: $comment-orange; }
@@ -184,18 +206,21 @@ $transition-speed: 0.3s;
     }
 
     .mobile-logout-wrapper {
-        position: absolute;
-        bottom: 40px;
+        flex-shrink: 0;
+        padding: clamp(15px, 3vh, 20px) 30px clamp(20px, 5vh, 40px) 30px; 
         width: 100%;
-        padding: 0 30px;
+        background-color: $mobile-navy;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+
         .logout-btn {
-            width: calc(100% - 60px);
+            width: 100%;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: #ff4d4d;
-            padding: 15px;
+            padding: clamp(10px, 2vh, 15px);
             border-radius: 10px;
             font-weight: 700;
+            font-size: clamp(0.9rem, 2.5vh, 1.1rem);
         }
     }
 }
